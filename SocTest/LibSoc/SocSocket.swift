@@ -1,6 +1,6 @@
 //
 //  SocSocket.swift
-//  LibSoc - Swift POSIX Socket Library
+//  LibSoc - Swifty POSIX Socket Library
 //
 //  Created by Hirose Manabu on 2021/01/31.
 //

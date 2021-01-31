@@ -213,7 +213,6 @@
 			children = (
 				6C5A4D0025C6894F003F2D6A /* AppDelegate.swift */,
 				6C5A4D0225C6894F003F2D6A /* SceneDelegate.swift */,
-				6C5A4D0425C6894F003F2D6A /* ContentView.swift */,
 				6C5A4DBD25C69328003F2D6A /* SocTest-Bridging-Header.h */,
 				6C5A4DEF25C694F6003F2D6A /* SocTestSharedObject.swift */,
 				6C5A4DCB25C693B5003F2D6A /* SocTestError.swift */,
@@ -224,6 +223,7 @@
 				6C5A4DE325C6948F003F2D6A /* SocTestIODataRow.swift */,
 				6C5A4DEC25C694D8003F2D6A /* SocTestScreen.swift */,
 				6C5A4DCE25C693CF003F2D6A /* SocTestFullView.swift */,
+				6C5A4D0425C6894F003F2D6A /* ContentView.swift */,
 				6C5A4DF225C69512003F2D6A /* SocTestSocketSimulator.swift */,
 				6C5A4DD125C693E9003F2D6A /* SocTestFunction.swift */,
 				6C5A4DE925C694C0003F2D6A /* SocTestOption.swift */,
