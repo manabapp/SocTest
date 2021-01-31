@@ -61,6 +61,34 @@
 		6C5A4D9025C68E67003F2D6A /* AppStore_US.svg in Resources */ = {isa = PBXBuildFile; fileRef = 6C5A4D7B25C68E67003F2D6A /* AppStore_US.svg */; };
 		6C5A4D9125C68E67003F2D6A /* NonBlocking.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C5A4D7C25C68E67003F2D6A /* NonBlocking.png */; };
 		6C5A4D9225C68E67003F2D6A /* AboutApp.001.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6C5A4D7D25C68E67003F2D6A /* AboutApp.001.jpeg */; };
+		6C5A4D9725C68FE6003F2D6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C5A4D9925C68FE6003F2D6A /* Localizable.strings */; };
+		6C5A4D9F25C69153003F2D6A /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4D9E25C69153003F2D6A /* Data+Extension.swift */; };
+		6C5A4DA325C69197003F2D6A /* icmp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DA225C69197003F2D6A /* icmp.swift */; };
+		6C5A4DA625C691CF003F2D6A /* SocAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DA525C691CF003F2D6A /* SocAddress.swift */; };
+		6C5A4DA925C691F8003F2D6A /* SocCmsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DA825C691F8003F2D6A /* SocCmsg.swift */; };
+		6C5A4DAC25C69229003F2D6A /* SocError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DAB25C69229003F2D6A /* SocError.swift */; };
+		6C5A4DAF25C69251003F2D6A /* SocLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DAE25C69251003F2D6A /* SocLogger.swift */; };
+		6C5A4DB225C69270003F2D6A /* SocOptval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DB125C69270003F2D6A /* SocOptval.swift */; };
+		6C5A4DB525C6928E003F2D6A /* SocSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DB425C6928E003F2D6A /* SocSocket.swift */; };
+		6C5A4DB825C692B8003F2D6A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DB725C692B8003F2D6A /* String+Extension.swift */; };
+		6C5A4DBB25C692DA003F2D6A /* UInt8+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DBA25C692DA003F2D6A /* UInt8+Extension.swift */; };
+		6C5A4DC325C6934E003F2D6A /* SocTestAddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DC225C6934E003F2D6A /* SocTestAddressManager.swift */; };
+		6C5A4DC625C69373003F2D6A /* SocTestAddressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DC525C69373003F2D6A /* SocTestAddressRow.swift */; };
+		6C5A4DC925C69397003F2D6A /* SocTestCommonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DC825C69397003F2D6A /* SocTestCommonRow.swift */; };
+		6C5A4DCC25C693B5003F2D6A /* SocTestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DCB25C693B5003F2D6A /* SocTestError.swift */; };
+		6C5A4DCF25C693CF003F2D6A /* SocTestFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DCE25C693CF003F2D6A /* SocTestFullView.swift */; };
+		6C5A4DD225C693E9003F2D6A /* SocTestFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DD125C693E9003F2D6A /* SocTestFunction.swift */; };
+		6C5A4DD525C69405003F2D6A /* SocTestInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DD425C69405003F2D6A /* SocTestInterface.swift */; };
+		6C5A4DD825C69421003F2D6A /* SocTestInterfaceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DD725C69421003F2D6A /* SocTestInterfaceConfiguration.swift */; };
+		6C5A4DDB25C69439003F2D6A /* SocTestIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DDA25C69439003F2D6A /* SocTestIO.swift */; };
+		6C5A4DDE25C69456003F2D6A /* SocTestIOData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DDD25C69456003F2D6A /* SocTestIOData.swift */; };
+		6C5A4DE125C69473003F2D6A /* SocTestIODataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DE025C69473003F2D6A /* SocTestIODataManager.swift */; };
+		6C5A4DE425C6948F003F2D6A /* SocTestIODataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DE325C6948F003F2D6A /* SocTestIODataRow.swift */; };
+		6C5A4DE725C694A7003F2D6A /* SocTestMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DE625C694A7003F2D6A /* SocTestMenu.swift */; };
+		6C5A4DEA25C694C0003F2D6A /* SocTestOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DE925C694C0003F2D6A /* SocTestOption.swift */; };
+		6C5A4DED25C694D8003F2D6A /* SocTestScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DEC25C694D8003F2D6A /* SocTestScreen.swift */; };
+		6C5A4DF025C694F6003F2D6A /* SocTestSharedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DEF25C694F6003F2D6A /* SocTestSharedObject.swift */; };
+		6C5A4DF325C69512003F2D6A /* SocTestSocketSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5A4DF225C69512003F2D6A /* SocTestSocketSimulator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +148,36 @@
 		6C5A4D7B25C68E67003F2D6A /* AppStore_US.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppStore_US.svg; sourceTree = "<group>"; };
 		6C5A4D7C25C68E67003F2D6A /* NonBlocking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NonBlocking.png; sourceTree = "<group>"; };
 		6C5A4D7D25C68E67003F2D6A /* AboutApp.001.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AboutApp.001.jpeg; sourceTree = "<group>"; };
+		6C5A4D9825C68FE6003F2D6A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C5A4D9B25C69016003F2D6A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C5A4D9E25C69153003F2D6A /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
+		6C5A4DA225C69197003F2D6A /* icmp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = icmp.swift; sourceTree = "<group>"; };
+		6C5A4DA525C691CF003F2D6A /* SocAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocAddress.swift; sourceTree = "<group>"; };
+		6C5A4DA825C691F8003F2D6A /* SocCmsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocCmsg.swift; sourceTree = "<group>"; };
+		6C5A4DAB25C69229003F2D6A /* SocError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocError.swift; sourceTree = "<group>"; };
+		6C5A4DAE25C69251003F2D6A /* SocLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocLogger.swift; sourceTree = "<group>"; };
+		6C5A4DB125C69270003F2D6A /* SocOptval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocOptval.swift; sourceTree = "<group>"; };
+		6C5A4DB425C6928E003F2D6A /* SocSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocSocket.swift; sourceTree = "<group>"; };
+		6C5A4DB725C692B8003F2D6A /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		6C5A4DBA25C692DA003F2D6A /* UInt8+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt8+Extension.swift"; sourceTree = "<group>"; };
+		6C5A4DBD25C69328003F2D6A /* SocTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		6C5A4DC225C6934E003F2D6A /* SocTestAddressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestAddressManager.swift; sourceTree = "<group>"; };
+		6C5A4DC525C69373003F2D6A /* SocTestAddressRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestAddressRow.swift; sourceTree = "<group>"; };
+		6C5A4DC825C69397003F2D6A /* SocTestCommonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestCommonRow.swift; sourceTree = "<group>"; };
+		6C5A4DCB25C693B5003F2D6A /* SocTestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestError.swift; sourceTree = "<group>"; };
+		6C5A4DCE25C693CF003F2D6A /* SocTestFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestFullView.swift; sourceTree = "<group>"; };
+		6C5A4DD125C693E9003F2D6A /* SocTestFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestFunction.swift; sourceTree = "<group>"; };
+		6C5A4DD425C69405003F2D6A /* SocTestInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestInterface.swift; sourceTree = "<group>"; };
+		6C5A4DD725C69421003F2D6A /* SocTestInterfaceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestInterfaceConfiguration.swift; sourceTree = "<group>"; };
+		6C5A4DDA25C69439003F2D6A /* SocTestIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestIO.swift; sourceTree = "<group>"; };
+		6C5A4DDD25C69456003F2D6A /* SocTestIOData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestIOData.swift; sourceTree = "<group>"; };
+		6C5A4DE025C69473003F2D6A /* SocTestIODataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestIODataManager.swift; sourceTree = "<group>"; };
+		6C5A4DE325C6948F003F2D6A /* SocTestIODataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestIODataRow.swift; sourceTree = "<group>"; };
+		6C5A4DE625C694A7003F2D6A /* SocTestMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestMenu.swift; sourceTree = "<group>"; };
+		6C5A4DE925C694C0003F2D6A /* SocTestOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestOption.swift; sourceTree = "<group>"; };
+		6C5A4DEC25C694D8003F2D6A /* SocTestScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestScreen.swift; sourceTree = "<group>"; };
+		6C5A4DEF25C694F6003F2D6A /* SocTestSharedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestSharedObject.swift; sourceTree = "<group>"; };
+		6C5A4DF225C69512003F2D6A /* SocTestSocketSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocTestSocketSimulator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,10 +214,30 @@
 				6C5A4D0025C6894F003F2D6A /* AppDelegate.swift */,
 				6C5A4D0225C6894F003F2D6A /* SceneDelegate.swift */,
 				6C5A4D0425C6894F003F2D6A /* ContentView.swift */,
+				6C5A4DBD25C69328003F2D6A /* SocTest-Bridging-Header.h */,
+				6C5A4DEF25C694F6003F2D6A /* SocTestSharedObject.swift */,
+				6C5A4DCB25C693B5003F2D6A /* SocTestError.swift */,
+				6C5A4DD425C69405003F2D6A /* SocTestInterface.swift */,
+				6C5A4DDD25C69456003F2D6A /* SocTestIOData.swift */,
+				6C5A4DC825C69397003F2D6A /* SocTestCommonRow.swift */,
+				6C5A4DC525C69373003F2D6A /* SocTestAddressRow.swift */,
+				6C5A4DE325C6948F003F2D6A /* SocTestIODataRow.swift */,
+				6C5A4DEC25C694D8003F2D6A /* SocTestScreen.swift */,
+				6C5A4DCE25C693CF003F2D6A /* SocTestFullView.swift */,
+				6C5A4DF225C69512003F2D6A /* SocTestSocketSimulator.swift */,
+				6C5A4DD125C693E9003F2D6A /* SocTestFunction.swift */,
+				6C5A4DE925C694C0003F2D6A /* SocTestOption.swift */,
+				6C5A4DD725C69421003F2D6A /* SocTestInterfaceConfiguration.swift */,
+				6C5A4DDA25C69439003F2D6A /* SocTestIO.swift */,
+				6C5A4DC225C6934E003F2D6A /* SocTestAddressManager.swift */,
+				6C5A4DE025C69473003F2D6A /* SocTestIODataManager.swift */,
+				6C5A4DE625C694A7003F2D6A /* SocTestMenu.swift */,
+				6C5A4D9D25C6912E003F2D6A /* LibSoc */,
 				6C5A4D0625C68950003F2D6A /* Assets.xcassets */,
 				6C5A4D0B25C68950003F2D6A /* LaunchScreen.storyboard */,
 				6C5A4D0E25C68950003F2D6A /* Info.plist */,
 				6C5A4D0825C68950003F2D6A /* Preview Content */,
+				6C5A4D9925C68FE6003F2D6A /* Localizable.strings */,
 			);
 			path = SocTest;
 			sourceTree = "<group>";
@@ -235,6 +313,23 @@
 			path = img;
 			sourceTree = "<group>";
 		};
+		6C5A4D9D25C6912E003F2D6A /* LibSoc */ = {
+			isa = PBXGroup;
+			children = (
+				6C5A4DB425C6928E003F2D6A /* SocSocket.swift */,
+				6C5A4DA525C691CF003F2D6A /* SocAddress.swift */,
+				6C5A4DB125C69270003F2D6A /* SocOptval.swift */,
+				6C5A4DA825C691F8003F2D6A /* SocCmsg.swift */,
+				6C5A4DAB25C69229003F2D6A /* SocError.swift */,
+				6C5A4DAE25C69251003F2D6A /* SocLogger.swift */,
+				6C5A4DA225C69197003F2D6A /* icmp.swift */,
+				6C5A4D9E25C69153003F2D6A /* Data+Extension.swift */,
+				6C5A4DBA25C692DA003F2D6A /* UInt8+Extension.swift */,
+				6C5A4DB725C692B8003F2D6A /* String+Extension.swift */,
+			);
+			path = LibSoc;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -266,6 +361,7 @@
 				TargetAttributes = {
 					6C5A4CFC25C6894E003F2D6A = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 				};
 			};
@@ -276,6 +372,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 6C5A4CF425C6894E003F2D6A;
 			productRefGroup = 6C5A4CFE25C6894E003F2D6A /* Products */;
@@ -301,6 +398,7 @@
 				6C5A4D8625C68E67003F2D6A /* ShutdownRdWr.png in Resources */,
 				6C5A4D5125C68D48003F2D6A /* index.html in Resources */,
 				6C5A4D6025C68DD6003F2D6A /* apps.css in Resources */,
+				6C5A4D9725C68FE6003F2D6A /* Localizable.strings in Resources */,
 				6C5A4D2725C68BDE003F2D6A /* Chapter3.html in Resources */,
 				6C5A4D1E25C68B68003F2D6A /* Chapter2_ja.html in Resources */,
 				6C5A4D2A25C68BF7003F2D6A /* Chapter4_ja.html in Resources */,
@@ -353,9 +451,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C5A4DC625C69373003F2D6A /* SocTestAddressRow.swift in Sources */,
+				6C5A4DAC25C69229003F2D6A /* SocError.swift in Sources */,
+				6C5A4DBB25C692DA003F2D6A /* UInt8+Extension.swift in Sources */,
+				6C5A4DED25C694D8003F2D6A /* SocTestScreen.swift in Sources */,
+				6C5A4DDE25C69456003F2D6A /* SocTestIOData.swift in Sources */,
+				6C5A4DB225C69270003F2D6A /* SocOptval.swift in Sources */,
+				6C5A4DB525C6928E003F2D6A /* SocSocket.swift in Sources */,
+				6C5A4DE725C694A7003F2D6A /* SocTestMenu.swift in Sources */,
+				6C5A4DC325C6934E003F2D6A /* SocTestAddressManager.swift in Sources */,
 				6C5A4D0125C6894F003F2D6A /* AppDelegate.swift in Sources */,
+				6C5A4DD525C69405003F2D6A /* SocTestInterface.swift in Sources */,
+				6C5A4DCC25C693B5003F2D6A /* SocTestError.swift in Sources */,
+				6C5A4DD225C693E9003F2D6A /* SocTestFunction.swift in Sources */,
+				6C5A4DF025C694F6003F2D6A /* SocTestSharedObject.swift in Sources */,
+				6C5A4DC925C69397003F2D6A /* SocTestCommonRow.swift in Sources */,
+				6C5A4DB825C692B8003F2D6A /* String+Extension.swift in Sources */,
+				6C5A4D9F25C69153003F2D6A /* Data+Extension.swift in Sources */,
+				6C5A4DA925C691F8003F2D6A /* SocCmsg.swift in Sources */,
+				6C5A4DE125C69473003F2D6A /* SocTestIODataManager.swift in Sources */,
+				6C5A4DF325C69512003F2D6A /* SocTestSocketSimulator.swift in Sources */,
+				6C5A4DA625C691CF003F2D6A /* SocAddress.swift in Sources */,
 				6C5A4D0325C6894F003F2D6A /* SceneDelegate.swift in Sources */,
 				6C5A4D0525C6894F003F2D6A /* ContentView.swift in Sources */,
+				6C5A4DCF25C693CF003F2D6A /* SocTestFullView.swift in Sources */,
+				6C5A4DE425C6948F003F2D6A /* SocTestIODataRow.swift in Sources */,
+				6C5A4DEA25C694C0003F2D6A /* SocTestOption.swift in Sources */,
+				6C5A4DA325C69197003F2D6A /* icmp.swift in Sources */,
+				6C5A4DDB25C69439003F2D6A /* SocTestIO.swift in Sources */,
+				6C5A4DAF25C69251003F2D6A /* SocLogger.swift in Sources */,
+				6C5A4DD825C69421003F2D6A /* SocTestInterfaceConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +495,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		6C5A4D9925C68FE6003F2D6A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C5A4D9825C68FE6003F2D6A /* en */,
+				6C5A4D9B25C69016003F2D6A /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -377,6 +511,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -438,6 +573,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -494,6 +630,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SocTest/Preview Content\"";
 				DEVELOPMENT_TEAM = DG8D574ZV8;
@@ -505,6 +642,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = manabapp.SocTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SocTest/SocTest-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -515,6 +654,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SocTest/Preview Content\"";
 				DEVELOPMENT_TEAM = DG8D574ZV8;
@@ -526,6 +666,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = manabapp.SocTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SocTest/SocTest-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    @ObservedObject(initialValue: SocTestSharedObject()) var object: SocTestSharedObject  // ADD 2021/01/31 manabapp
     var window: UIWindow?
 
 
@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
+            .environmentObject(object)  // ADD 2021/01/31 manabapp
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -58,6 +59,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
+    // ADD 2021/01/31 manabapp
+    func windowScene(_ windowScene: UIWindowScene, didUpdate previousCoordinateSpace: UICoordinateSpace, interfaceOrientation previousInterfaceOrientation: UIInterfaceOrientation, traitCollection previousTraitCollection: UITraitCollection) {
+        withAnimation {
+            object.orientation = windowScene.interfaceOrientation
+        }
+    }
 }
 
