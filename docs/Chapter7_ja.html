@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Chapter 7. Data Manager (Japanese)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>第7章 Data Manager<br><a href="help_ja.html">SOCTEST - USER'S GUIDE</a></center><br>
+
+本章では、データの管理および編集機能について説明します。<p>
+
+Data Manager 画面では、送受信データの作成、参照、編集、および 削除を行います。<p>
+
+<h1>データの作成</h1>
+<b>New Data</b> をタップし、次に遷移する画面でデータ名を入力して送信用の空データを作成します。<br>
+作成したデータは画面に一覧表示されます。<p>
+
+このデータを、send(2) 等による送信時にカスタムデータとして使用します。<br>
+データの登録数の上限は 32 個です（受信データの保存数を含みます）。<p>
+<br>
+
+<h1>データの参照</h1>
+一覧に表示されているデータをタップすると、バイナリエディタ画面に遷移します。<br>
+送信用データは更新可能であり、受信データは参照専用です。<br>
+バイナリエディタ画面は、ASCII テキスト表示エリア、16 進数（HEX）ダンプ表示エリア、および 操作メニューで構成されます。<br>
+データが画面サイズに収まりきらない場合は、フル画面で表示できます。<p>
+
+ASCII テキストにおけるマルチバイトコードのエンコーディングは、UTF-8 です。<br>
+UTF-8 以外のバイト列を含む場合は、ASCII テキスト表示エリアに <b>非 UNICODE 文字列データ</b> と表示されます。<p>
+<br>
+
+<h1>データの編集</h1>
+バイナリエディタ画面で以下の流れで操作します。<p>
+
+<ol>
+<li>データを編集します</li>
+ASCII または HEX の編集可能エリアをタップすると、端末キーボードが現れて編集可能となります。<br>
+1つあたりのデータの最大サイズは、64KB に制限しています。<p>
+
+<li>編集したデータを変換します</li>
+<b>変換</b> をタップして ASCII と HEX 間でデータを同期させます。<br>
+ASCII から HEX への変換する場合は、"¥n" を 0x0a（LF） / 0x0d0a（CRLF） のどちらかに変換するために改行コードを切り替えます。<p>
+
+<li>データを保存します</li>
+編集が完了すると、<b>保存</b> がタップ可能となります。<br>
+これをタップしてデータを保存します。<p>
+</ol><p>
+<br>
+
+<h1>データの削除</h1>
+データ行を左にスワイプすることで当該データを削除します。<p>
+
+<br>
+<center><hr>
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    <a href="Chapter7.html">English</a> | 日本語
+</center>
+</body>
+</html>

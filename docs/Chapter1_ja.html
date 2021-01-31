@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Chapter 1. Socket Simulator (Japanese)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>第1章 Socket Simulator<br><a href="help_ja.html">SOCTEST - USER'S GUIDE</a></center><p>
+
+本章では、ソケットシミュレーター（本アプリ）の初期画面（以降、トップ画面）の機能について説明します。<p>
+
+トップ画面では、ソケットの作成、削除、状態確認、および一覧表示を行います。<p>
+
+<h1>ソケットの作成</h1>
+<b>socket</b> をタップし、次の画面でプロトコルファミリー・ソケットタイプ・プロトコルを選択します。socket(2) を発行して新しいソケットを作成します。<br>
+作成したソケットは画面に一覧表示されます。<p>
+
+[補足]<br>
+ソケット作成数の上限は設けていません。<p>
+<br>
+
+<h1>ソケットの削除</h1>
+ソケット行を左にスワイプすることで当該ソケットに対して close(2) を発行し、一覧から削除します。<p>
+<br>
+
+<h1>ソケットの状態確認（polling）</h1>
+画面を下に引っ張ることで全てのソケットの状態を polling します。<br>
+この polling は、POLLIN|POLLPRI|POLLOUT を監視対象としてタイムアウト 0 秒で poll(2) を発行します。<p>
+<br>
+
+<h1>ソケットの一覧表示</h1>
+一覧表示におけるソケットの情報や状態の見方を示します。<p>
+
+<h2>アイコン</h2>
+ソケットの状態に応じて変化します。<p>
+
+<table>
+<tr><th colspan=2>アイコン表示</th><th>説明</th></tr>
+<tr><td rowspan=2 align=center>役割</td><td align=center><img src="img/ServerSocket.png"></td><td><b>サーバーソケット</b><br>listen(2) を発行して接続待ちのリスニングソケット。または、accept(2) を発行して生成したソケットを指す。</td></tr>
+<tr><td align=center><img src="img/ClientSocket.png"></td><td><b>クライアントソケット</b><br>上記以外</td></tr>
+<tr><td rowspan=2 align=center>I/O<br>モード<br>(<b>*1</b>)</td><td align=center><img src="img/NonBlocking.png"></td><td><b>非停止（以降、non-blocking）モード</b><br>fcntl(2) を発行してファイル状態フラグに O_NONBLOCK をセットしている状態。</td></tr>
+<tr><td align=center><img src="img/Blocking.png"></td><td><b>停止（以降、blocking）モード</b><br>上記以外</td></tr>
+<tr><td rowspan=8 align=center>接続<br>状態<br>(<b>*2</b>)</td><td align=center><img src="img/Idle.png"></td><td><b>未接続状態</b><br>初期状態。または bind(2) を発行してアドレスが割り当て済みの状態。</td></tr>
+<tr><td align=center><img src="img/Listening.png"></td><td><b>リスニング中</b><br>listen(2) を発行して接続待ち。
+</td></tr>
+<tr><td align=center><img src="img/ConnectInProgress.png"></td><td><b>接続処理中</b><br>non-blocking ソケットに対する接続処理の完了待ち。</td></tr>
+<tr><td align=center><img src="img/ConnectError.png"></td><td><b>接続エラー状態</b><br>ソケットの接続処理でエラーが発生した。</ol></td></tr>
+<tr><td align=center><img src="img/Connected.png"></td><td><b>接続済み状態（全二重接続状態）</b><br>ソケットに対する接続処理が正常完了した。または、accept(2) を発行してソケットを生成した。</td></tr>
+<tr><td align=center><img src="img/ShutdownRd.png"></td><td><b>接続済み状態</b><br>全二重の受信側が閉じている状態。</td></tr>
+<tr><td align=center><img src="img/ShutdownWr.png"></td><td><b>接続済み状態</b><br>全二重の送信側が閉じている状態。</td></tr>
+<tr><td align=center><img src="img/ShutdownRdWr.png"></td><td><b>切断状態</b><br>全二重の全てが閉じている状態。</td></tr>
+</table><p>
+&nbsp;<b>*1</b> I/O モードのアイコンは、アプリの設定 <b>DESCRIPTION</b> が有効な場合に表示されます。<br>
+&nbsp;<b>*2</b> 接続状態のアイコンは、アプリの設定 <b>AUTO MONITORING</b> が有効な場合に、SOCK_STREAM ソケットで表示されます。<p>
+<br>
+
+<h2>ソケットアドレス（上段）</h2>
+アドレスが割り当て済みの場合に <b>Src <i>Address</i></b> と表示されます。<br>
+ただし、リスニング中のソケットを除きます。<p>
+
+<i>Address</i> には、IP アドレスとポート番号（PF_INET の場合）または UNIX ドメインパス（PF_UNIX の場合）が表示されます。<p>
+<br>
+
+<h2>ソケット表示名</h2>
+ソケットの状態に応じて以下のように表示されます。<p>
+
+<table>
+<tr><th>表示名</th><th>状態</th></tr>
+<tr><td><b>INET domain socket</b></td><td>AF_INET ソケット（初期表示）</td></tr>
+<tr><td><b>UNIX domain socket</b></td><td>AF_UNIX ソケット（初期表示）</td></tr>
+<tr><td><b>Dst <i>Address</i></b></td><td>ソケットが接続済み。</td></tr>
+<tr><td><b>Src <i>Address</i></b></td><td>ソケットがリスニング中。<br>または、SOCK_DGRAM ソケットにアドレスが割り当て済み。</td></tr>
+</table><p>
+<br>
+
+<h2>ソケットパラメータ（下段１）</h2>
+ソケットの情報が表示されます。<br>
+アプリの設定 <b>DESCRIPTION</b> が有効な場合に表示されます。<p>
+
+<ul>
+<li>ファイルディスクリプター番号
+<li>プロトコルファミリー
+<li>ソケットタイプ
+<li>プロトコル（デフォルトの 0 以外を指定した場合）
+</ul><p>
+<br>
+
+<h2>ソケット接続状態（下段２）</h2>
+ソケットの接続状態が表示されます。接続状態は、上述のアイコンと連動します。<br>
+アプリの設定 <b>AUTO MONITORING</b> が有効な場合に、SOCK_STREAM ソケットで表示されます。<p>
+<table>
+<tr><th>接続状態</th><th>Icon</th><th>説明</th></tr>
+<tr><td><b>Idle</b></td><td rowspan=2 align=center><img src="img/Idle.png"></td><td>初期状態</td></tr>
+<tr><td><b>Bound</b></td><td>アドレスが割り当て済み</td></tr>
+<tr><td><b>Listening</b></td><td align=center><img src="img/Listening.png"></td><td>リスニング中</td></tr>
+<tr><td><b>Connect in progress</b></td><td align=center><img src="img/ConnectInProgress.png"></td><td>接続処理中</td></tr>
+<tr><td><b>Connect error</b></td><td align=center><img src="img/ConnectError.png"></td><td>接続エラー状態<br>付加情報としてエラー値が表示されます。<br>&nbsp;&nbsp;Err#&lt;<i>errno 番号</i>&gt; &lt;<i><font color=red><b>errno 名</b></font></i>&gt;</td></tr>
+<tr><td rowspan=3><b>Connected</b></td><td align=center><img src="img/Connected.png"></td><td rowspan=3>接続済み状態</td></tr>
+<tr><td align=center><img src="img/ShutdownRd.png"></td></tr>
+<tr><td align=center><img src="img/ShutdownWr.png"></td></tr>
+<tr><td><b>Disconnect</b></td><td align=center><img src="img/ShutdownRdWr.png"></td><td>切断状態</td></tr>
+</table><p>
+
+ソケットの接続状態は、以下のとおり遷移します。<br>
+<img src="img/ConnectionStatus.001.jpeg" width=100%><p>
+<br>
+
+<h2>TCP ステータス（下段３）</h2>
+ソケットに紐づいている TCP コネクションのステータスが表示されます。<br>
+アプリの設定 <b>AUTO MONITORING</b> が有効な場合に、TCP ソケット（SOCK_STREAM タイプの AF_INET ソケット）で表示されます。<p>
+
+このステータスは、TCP_CONNECTION_INFO オプションで取得できるパラメータ tcpi_state の値をもとに表示されます。<br>
+ステータスの詳細は、RFC#793 やインターネット公開サイトの情報を参考にしてください。<p>
+
+<table>
+<tr><th>tcpi_state</th><th>ステータス</th></tr>
+<tr><td>0</td><td>CLOSED</td></tr>
+<tr><td>1</td><td>LISTEN</td></tr>
+<tr><td>2</td><td>SYN_SENT</td></tr>
+<tr><td>3</td><td>SYN_RECEIVED</td></tr>
+<tr><td>4</td><td>ESTABLISHED</td></tr>
+<tr><td>5</td><td>CLOSE_WAIT</td></tr>
+<tr><td>6</td><td>FIN_WAIT_1</td></tr>
+<tr><td>7</td><td>CLOSING</td></tr>
+<tr><td>8</td><td>LAST_ACK</td></tr>
+<tr><td>9</td><td>FIN_WAIT_2</td></tr>
+<tr><td>10</td><td>TIME_WAIT</td></tr>
+</table><p>
+<br>
+
+<h2>TCP トラフィック量（下段４〜６）</h2>
+TCP コネクションを使用したパケット転送処理における送受信トラフィック量が表示されます。<br>
+アプリの設定 <b>AUTO MONITORING</b> が有効な場合に、ステータスが CLOSED、LISTEN 以外の TCP ソケットで表示されます。<p>
+
+この情報は、TCP_CONNECTION_INFO オプションで取得できるパラメータの値が表示されます。<br>
+
+<table>
+<tr><th>表示項目</th><th>パラメータ</th><th>説明</th></tr>
+<tr><td><b>RX</b></td><td>tcpi_rxbytes<br>tcpi_rxpackets</td><td>受信したデータ量（バイト単位 / パケット数単位）</td></tr>
+<tr><td><b>TX</b></td><td>tcpi_txbytes<br>tcpi_txpackets</td><td>送信したデータ量（バイト単位 / パケット数単位）</td></tr>
+<tr><td><b>Retransmit</b></td><td>tcpi_txretransmitbytes<br>tcpi_txretransmitpackets</td><td>再送したデータ量（バイト単位 / パケット数単位）</td></tr>
+</table><p>
+<br>
+
+<h2>TCP RTT（下段７）</h2>
+TCP 通信における RTT（ラウンドトリップ時間）が表示されます（精度: ミリ秒）。<br>
+アプリの設定 <b>AUTO MONITORING</b> が有効な場合に、ステータスが CLOSED、LISTEN 以外の TCP ソケットで表示されます。<p>
+
+この情報は、TCP_CONNECTION_INFO オプションで取得できるパラメータの値が表示されます。<br>
+
+<table>
+<tr><th>表示項目</th><th>パラメータ</th><th>説明</th></tr>
+<tr><td><b>Average RTT</b></td><td>tcpi_srtt</td><td>RTT の平均値（秒単位）</td></tr>
+<tr><td><b>Recent RTT</b></td><td>tcpi_rttcur</td><td>RTT の直近値（秒単位）</td></tr>
+</table><p>
+<br>
+
+<h2>イベントビットマスク（下段８）</h2>
+polling でチェックしたイベントのビットマスクが表示されます。イベントが設定されている場合は、該当するイベントビットが強調表示されます。<br>
+着信データ・エラー発生の有無や非同期処理の終了判定を確認するために利用します。<p>
+
+以下に示す 3 通りの polling の結果が表示されます。
+<ul>
+<li>全てのソケットに対して実施する polling（上述）
+<li>監視するイベントとタイムアウト値を指定して実施する polling（<a href="Chapter2_ja.html">第2章 Socket Simulator - Functions</a> を参照）
+<li>アプリの設定 <b>AUTO MONITORING</b> が有効な場合に自動で実施される polling （<a href="Chapter8_ja.html">第8章 Menu</a> を参照）
+</ul><p>
+
+<br>
+<center><hr>
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    <a href="Chapter1.html">English</a> | 日本語
+</center>
+</body>
+</html>

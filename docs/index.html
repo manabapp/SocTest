@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="viewport" content="width=375,initial-scale=1,user-scalable=yes">
+<title>SocTest</title>
+<link rel="stylesheet" href="apps.css">
+</head>
+<body>
+<center>
+<img src="img/SocTest_splash.png" width=130 height=130><br>
+<div class="title">SocTest</div>
+
+<p>
+
+You can control freely POSIX Socket API with tap & swipe.<br>
+( <font color=red>Prepare for Submission</font> )
+<!--
+<div class="yoko">
+    <div><img class="screenshotimg" src="img/ScreenShot1.jpeg" alt="image1" width=276px height=597px></div>
+    <div><img class="screenshotimg" src="img/ScreenShot2.jpeg" alt="image2" width=276px height=597px></div>
+    <div><img class="screenshotimg" src="img/ScreenShot3.jpeg" alt="image3" width=276px height=597px></div>
+    <div><img class="screenshotimg" src="img/ScreenShot4.jpeg" alt="image4" width=276px height=597px></div>
+    <div><img class="screenshotimg" src="img/ScreenShot5.jpeg" alt="image5" width=276px height=597px></div>
+    <div><img class="screenshotimg" src="img/ScreenShot6.jpeg" alt="image6" width=276px height=597px></div>
+    <div><img class="screenshotimg" src="img/ScreenShot7.jpeg" alt="image7" width=276px height=597px></div>
+    <div><img class="screenshotimg" src="img/ScreenShot8.jpeg" alt="image8" width=276px height=597px></div>
+    <div><img class="screenshotimg" src="img/ScreenShot9.jpeg" alt="image9" width=276px height=597px></div>
+    <div><img class="screenshotimg" src="img/ScreenShot10.jpeg" alt="image10" width=276px height=597px></div>
+</div>
+
+<p>
+-->
+<div id="p1">
+    <a onclick="showDescription();">Learn more</a>
+</div>
+<div id="p2">
+    <a onclick="hideDescription();">Hide text</a><br>
+    <p align="left">
+    SocTest is the mobile app that communicates via socket with using system calls to the kernel (Darwin based on Unix). You can access to various hosts on the Internet with 3G/4G, and access to servers on secured corporate intranet with Wi-Fi.<br><br>
+    
+    <img src="img/AboutApp.001.jpeg" width=100% /><br><br>
+    
+    All of network operations in SocTest is implemented with POSIX C API. It is designed to delegate processing to the kernel as much as possible without sandwiching any highly abstract API, without error judgment of user input more than necessary.<br>
+    As a result, it is realizable a basic (low-level) and interactive (high-flexibile) socket communication. You can complement the major network test tools in troubleshooting and connectivity testing, etc.<br><br>
+
+    <img src="img/AboutApp.002.jpeg" width=100% /><br><br>
+
+    Through using SocTest, you will become able to imagine the socket behavior, the basis of network technology. I hope that you utilize not only as a test tool but also as a learning tool to deepen your understanding of network.
+    </p>
+    <a onclick="hideDescription();">Hide text</a>
+</div>
+
+<p>
+<br>
+<!-- refer: https://primer.style/octicons/ -->
+<a href="../Apps/index.html"><img src="img/home.svg" height=24></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="help.html"><img src="img/question.svg" height=24></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--
+<a href="https://github.com/manabapp/SocPing"><img src="img/mark-github.svg" height=24></a>
+-->
+<img src="img/gray-github.svg" height=24>
+
+<p>
+
+<!-- refer: https://qiita.com/macoril/items/48125b2a0a48339b3693 -->
+<!-- refer: https://developer.apple.com/jp/app-store/marketing/guidelines/ -->
+<a href="https://itunes.apple.com/app/idXXXXXXXXXX?mt=8"><img src="img/AppStore_US.svg"></a><br>
+<span class="trademarks">Apple, the Apple logo are registered trademarks of Apple Inc.</span>
+
+<p>
+
+<div class="copyright">
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    <a class="footer" href="TermsOfService.html">Terms</a>&nbsp;&nbsp;-&nbsp;
+    <a class="footer" href="PrivacyPolicy.html">Privacy</a>&nbsp;&nbsp;-&nbsp;
+    English | <a class="footer" href="index_ja.html">Japanese</a>
+</div>
+
+<p>
+
+</center>
+<script>
+document.getElementById("p1").style.display = "block";
+document.getElementById("p2").style.display = "none";
+function showDescription(){
+    document.getElementById("p1").style.display = "none";
+    document.getElementById("p2").style.display = "block";
+}
+function hideDescription(){
+    document.getElementById("p1").style.display = "block";
+    document.getElementById("p2").style.display = "none";
+}
+</script>
+</body>
+</html>

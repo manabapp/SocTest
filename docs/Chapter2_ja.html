@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Chapter 2. Socket Simulator - Functions (Japanese)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>第2章 Socket Simulator - Functions<br><a href="help_ja.html">SOCTEST - USER'S GUIDE</a></center><br>
+
+本章では、ソケットに対する各種操作について説明します。<p>
+
+トップ画面でソケットをタップすると、そのソケットに対するシステムコールの一覧画面に遷移します。<br>
+ここで選択したシステムコールを発行します。<p>
+
+<ul>
+<li>システムコールが正常復帰（0 以上が返却）した場合</li>
+一部を除き、直前の画面に戻ります。<br>
+システムコールによって取得または状態変化した結果は、トップ画面に反映されます。<p>
+
+<li>システムコールがエラー復帰（-1 が返却）した場合</li>
+ポップアップで errno および エラーメッセージが表示されます。<br>
+エラーの原因調査はユーザー自身で実施してください。<br>
+iOS における errno は、<a href="Chapter8_ja.html">第8章 Menu</a> を参照してください。<p>
+</ul><p>
+<br>
+
+<h1>getsockopt / setsockopt</h1>
+ソケットオプションを取得 / 設定します。<a href="Chapter3_ja.html">第3章 Socket Simulator - Options</a> を参照してください。<p>
+<br>
+
+<h1>bind</h1>
+ソケットにアドレスを割り当てます。<br>
+割り当てアドレスは、次に遷移するアドレス一覧画面で選択します。なお、アドレスは事前に Address Manager で登録する必要があります。詳細は、<a href="Chapter6_ja.html">第6章 Address Manager</a> を参照してください。<p>
+<br>
+
+<h1>connect</h1>
+ソケットを指定されたアドレスに接続します。<br>
+接続先アドレスは、次に遷移するアドレス一覧画面で選択します。なお、アドレスは事前に Address Manager で登録する必要があります。詳細は、<a href="Chapter6_ja.html">第6章 Address Manager</a> を参照してください。<p>
+    
+SOCK_STREAM の non-blocking ソケットでは、connect(2) が EINPROGRESS でエラー復帰します。この場合、接続完了を監視することができます。詳細は、<a href="Chapter8_ja.html">第8章 Menu</a> を参照してください。<p>
+
+[補足]<br>
+本アプリでは、シグナル割り込みにより connect(2) を中断する機能は提供していません。<br>
+そのため、接続が即時に完了しない（主にリモートホストに不到達）の場合は、接続タイムアウトになるまで待つ必要があります。<p>
+<br>
+
+<h1>listen</h1>
+リスニングソケットとしてソケットを接続待ち状態にします。<br>
+到着した接続要求はキューに入ります。このキューの長さ（backlog）を次に遷移する画面で指定します。<p>
+
+[注意]<br>
+ANY アドレス（0.0.0.0）を割り当てたソケットを使用する場合、不特定多数のホストからのアクセスを受け付けることに留意してください。<br>
+この場合、accept(2) や recv(2) を発行しなくても、リモートからの backlog 分の接続を受け入れ、それぞれ受信バッファー分のデータをカーネルが受信します。<br>
+セキュリティを考慮する場合は信頼できる Wi-Fi に接続するなどユーザー自身でセキュリティを確保してください。<p>
+
+[補足]<br>
+iOS では SO_ACCEPTFILTER オプションを使用できません。また、ジェイルブレイクしていない iOS 端末では、カーネルの Firewall 機能（packet filter や ipfw）を使用できません。<br>
+そのため、本アプリでは、Firewall に相当する制御（特定ホストからのアクセス遮断）ができません。<p>
+<br>
+
+<h1>accept</h1>
+接続要求をキューから取り出して接続済みソケットを新たに作成します。<br>
+接続元アドレスを取得するかどうかを次に遷移する画面で指定して実行します。<p>
+
+[補足]<br>
+本アプリでは、シグナル割り込みにより accept(2) を中断する機能は提供していません。<br>
+そのため、キューが空（接続要求が未到着）の場合、新規の接続要求が到着するまで操作できません。<br>
+この場合は、アプリを再起動してください。<p>
+<br>
+
+<h1>send</h1>
+<h1>sendto</h1>
+<h1>sendmsg</h1>
+<h1>recv</h1>
+<h1>recvfrom</h1>
+<h1>recvmsg</h1>
+ソケットを使用してデータの送受信を行います。<a href="Chapter4_ja.html">第4章 Socket Simulator - I/O</a> を参照してください。<p>
+<br>
+
+<h1>getsockname</h1>
+ソケットに結び付けられている現在のアドレスを取得します。<br>
+このアドレスはトップ画面に反映されます。詳細は、<a href="Chapter1_ja.html">第1章 Socket Simulator</a> を参照してください。<p>
+
+なお、接続時に自動でアドレスを調べて反映することができます。詳細は、<a href="Chapter8_ja.html">第8章 Menu</a> を参照してください。<p>
+<br>
+
+<h1>getpeername</h1>
+ソケットに接続している相手のアドレスを取得します。<br>
+このアドレスはトップ画面に反映されます。詳細は、<a href="Chapter1_ja.html">第1章 Socket Simulator</a> を参照してください。<p>
+<br>
+
+<h1>shutdown</h1>
+全二重接続の一部または全てを閉じます。<br>
+次に遷移する画面で全二重接続の閉じ方（how）を選択します。<br>
+全二重接続の状態はトップ画面に反映されます。詳細は、<a href="Chapter1_ja.html">第1章 Socket Simulator</a> を参照してください。<p>
+<br>
+
+<h1>fcntl(F_GETFL / F_SETFL)</h1>
+F_GETFL コマンドを使用して現在のソケットの I/O モードを確認します。また、F_SETFL コマンドを使用してソケットの I/O モードを変更します。<br>
+ファイル状態フラグに O_NONBLOCK がセットされていれば、non-blocking モードであることを示します。<br>
+現在の I/O モードはトップ画面に反映されます。詳細は、<a href="Chapter1_ja.html">第1章 Socket Simulator</a> を参照してください。<p>
+<br>
+
+<h1>poll</h1>
+ソケットが送受信可能な状態になるのを待ち合わせます（polling）。<br>
+この polling では、次に遷移する画面でタイムアウト時間（ミリ秒単位）を選択し、その次の画面で監視するイベント（POLLIN、POLLPRI、および POLLOUT から 0 個以上）を指定します。<br>
+各イベントの機能については、man page やインターネット公開サイトの情報を参考にしてください。<p>
+
+poll(2) が復帰すると監視結果として発生したイベントが表示されます。<p>
+
+[補足]<br>
+本アプリでは、シグナル割り込みにより poll(2) を中断する機能は提供していません。<br>
+そのため、<b>No timeout</b>（無期限にブロック）を指定した場合にイベントが無いと操作できなくなリます。<br>
+この場合は、アプリを再起動してください。<br>
+
+<br>
+<center><hr>
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    <a href="Chapter2.html">English</a> | 日本語
+</center>
+</body>
+</html>

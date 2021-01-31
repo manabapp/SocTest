@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Chapter 1. Socket Simulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>Chapter 1. Socket Simulator<br><a href="help.html">SOCTEST - USER'S GUIDE</a></center><p>
+
+In this chapter, it describes about the function of Socket Simulator's initial view (Top View).<p>
+
+In this view, creates, deletes, and polls a socket. And, lists sockets<p>
+
+<h1>Creation a socket</h1>
+With tapping <b>socket</b>, moves to the next view. You select protocol family, socket type, and protocol in the next view, then a new socket is created with calling socket(2).<br>
+The created sockets are listed in Top View.<p>
+
+[Note]<br>
+No upper limit on the number of sockets that can be created.<p>
+<br>
+
+<h1>Deletion a socket</h1>
+With swiping left a row, close(2) is called to close the socket, then removes from the list.<p>
+<br>
+
+<h1>Polling for all sockets</h1>
+With pulling down Top View, you can poll the status for all sockets.<br>
+In this polling, it calls poll(2) with POLLIN|POLLPRI|POLLOUT as request events and 0 seconds as timeout.<p>
+<br>
+
+<h1>Listing sockets</h1>
+It describes how to confirm the information and the status of socket in the list.<p>
+
+<h2>Icon</h2>
+It changes depending on the status of socket.<p>
+
+<table>
+<tr><th colspan=2>Icon</th><th>Description</th></tr>
+<tr><td rowspan=2 align=center>Role</td><td align=center><img src="img/ServerSocket.png"></td><td><b>Server socket</b><br>Socket is waiting a connection request with calling listen(2).<br>Or, socket was created with accept(2).</td></tr>
+<tr><td align=center><img src="img/ClientSocket.png"></td><td><b>Client socket</b><br>Other than those above.</td></tr>
+<tr><td rowspan=2 align=center>I/O mode<br>(<b>*1</b>)</td><td align=center><img src="img/NonBlocking.png"></td><td><b>Non-blocking mode</b><br>The file status flag of socket was set to O_NONBLOCK with fcntl(2).</td></tr>
+<tr><td align=center><img src="img/Blocking.png"></td><td><b>Blocking mode</b><br>Other than those above.</td></tr>
+<tr><td rowspan=8 align=center>Connection<br>status (<b>*2</b>)</td><td align=center><img src="img/Idle.png"></td><td><b>Not connected</b><br>Status is Idle. Or, the socket is bound with calling bind(2).</td></tr>
+<tr><td align=center><img src="img/Listening.png"></td><td><b>Listening</b><br>Waiting for connection request with calling listen(2).</td></tr>
+<tr><td align=center><img src="img/ConnectInProgress.png"></td><td><b>Connect in progress</b><br>Waiting for completion of connection for the non-blocking socket.</td></tr>
+<tr><td align=center><img src="img/ConnectError.png"></td><td><b>Connect error</b><br>Error occurred in connection for the socket.</td></tr>
+<tr><td align=center><img src="img/Connected.png"></td><td><b>Connected (in full duplex)</b><br>Completion connect for the socket. Or, the socket was created with accept(2).</td></tr>
+<tr><td align=center><img src="img/ShutdownRd.png"></td><td><b>Connected</b><br>Receiver side of full duplex was shut down.</td></tr>
+<tr><td align=center><img src="img/ShutdownWr.png"></td><td><b>Connected</b><br>Sender side of full duplex was shut down.</td></tr>
+<tr><td align=center><img src="img/ShutdownRdWr.png"></td><td><b>Disconnect</b><br>All of full duplex were shut down.</td></tr>
+</table><p>
+&nbsp;<b>*1</b> When the app setting <b>SHOW DESCRIPTION</b> is enabled, the icon of I/O mode is displayed.<br>
+&nbsp;<b>*2</b> When the app setting <b>CONNECTION MONITORING</b> is enabled, the icon of connection status is displayed with SOCK_STREAM socket. But, this row disappers when becomes a listening socket.<p>
+<br>
+
+<h2>Socket address (Upper row)</h2>
+If socket assigned an address, <b>Src <i>Address</i></b> is displayed.<br>
+But, excepts a listening socket.<p>
+
+In <i>Address</i>, the pair of IP address and port (if PF_INET), or UNIX domain path (if PF_UNIX) is displayed.<p>
+<br>
+
+<h2>Socket title</h2>
+A title depending on the status of socket is displayed.<p>
+
+<table>
+<tr><th>Title</th><th>Status</th></tr>
+<tr><td><b>INET domain socket</b></td><td>Initial state of AF_INET socket</td></tr>
+<tr><td><b>UNIX domain socket</b></td><td>Initial state of AF_UNIX socket</td></tr>
+<tr><td><b>Dst <i>Address</i></b></td><td>Socket is connected</td></tr>
+<tr><td><b>Src <i>Address</i></b></td><td>Socket is listening<br>Or, SOCK_DGRAM socket is assinged an address</td></tr>
+</table><p>
+<br>
+
+<h2>Socket parameters (Lower row 1)</h2>
+The following informaiton is displayed.<br>
+When the app setting <b>SHOW DESCRIPTION</b> is enabled, this row is displayed.<p>
+
+<ul>
+<li>File discriptor number
+<li>Protocol family
+<li>Socket type
+<li>Protocol (except specifying default 0)
+</ul><p>
+<br>
+
+<h2>Socket connection status (Lower row 2)</h2>
+Connection status of the socket are displayed. This status interlocks the above icon.<br>
+When the app setting <b>CONNECTION MONITORING</b> is enabled, this row is displayed with SOCK_STREAM socket.<br>
+But, this row disappers when becomes a listening socket.<p>
+
+<table>
+<tr><th>Connection status</th><th>Icon</th><th>Description</th></tr>
+<tr><td><b>Idle</b></td><td rowspan=2 align=center><img src="img/Idle.png"></td><td>connect(2), bind(2) and listen(2) have not been called for the socket yet.</td></tr>
+<tr><td><b>Bound</b></td><td>bind(2) have been called for the socket.</td></tr>
+<tr><td><b>Connect in progress</b></td><td align=center><img src="img/ConnectInProgress.png"></td><td>Waiting for completion of connecting.</td></tr>
+<tr><td><b>Connect error</b></td><td align=center><img src="img/ConnectError.png"></td><td>Error occurred in connecting process.<br>The following error value is displayed as an additional information.<br><br>&nbsp;&nbsp;<b>Err#</b>&lt;<i>errno number</i>&gt; &lt;<i>errno name</i>&gt;</td></tr>
+<tr><td rowspan=3><b>Connected</b></td><td align=center><img src="img/Connected.png"></td><td rowspan=3>Socket is connected.<br>In a blocking socket, the following time required for connection process (microsecond accuracy) is displayed as an additional information.<br><br>&nbsp;&nbsp;<b>Response:</b> &lt;<i>Response Time</i> (<b>*3</b>)&gt;</td></tr>
+<tr><td align=center><img src="img/ShutdownRd.png"></td></tr>
+<tr><td align=center><img src="img/ShutdownWr.png"></td></tr>
+<tr><td><b>Disconnect</b></td><td align=center><img src="img/ShutdownRdWr.png"></td><td>Socket is disconnected.</td></tr>
+</table><p>
+&nbsp;<b>*3</b> For TCP sockets, this response time can be considered the Initial RTT.<br>
+Initial RTT is round-trip time until SYN/ACK responds in TCP 3 way-handshake. Therefore, if no TCP retransmission occurs in SYN or SYN/ACK, this time approximates the response time of connect(2).<p>
+
+Connection status transition diagram is as below.<br>
+<img src="img/ConnectionStatus.001.jpeg" width=100%><p>
+<br>
+
+<h2>TCP state (Lower row 3)</h2>
+The state of TCP connection associated with a socket is displayed.<br>
+When the app setting <b>CONNECTION MONITORING</b> is enabled, this row is displayed with TCP socket (AF_INET socket of SOCK_STREAM type).<p>
+
+This state is displayed based on the values of parameter tcpi_state obtained TCP_CONNECTION_INFO option.<br>
+See RFC#793 or internet public site for details.<p>
+
+<table>
+<tr><th>tcpi_state</th><th>State</th></tr>
+<tr><td>0</td><td>CLOSED</td></tr>
+<tr><td>1</td><td>LISTEN</td></tr>
+<tr><td>2</td><td>SYN_SENT</td></tr>
+<tr><td>3</td><td>SYN_RECEIVED</td></tr>
+<tr><td>4</td><td>ESTABLISHED</td></tr>
+<tr><td>5</td><td>CLOSE_WAIT</td></tr>
+<tr><td>6</td><td>FIN_WAIT_1</td></tr>
+<tr><td>7</td><td>CLOSING</td></tr>
+<tr><td>8</td><td>LAST_ACK</td></tr>
+<tr><td>9</td><td>FIN_WAIT_2</td></tr>
+<tr><td>10</td><td>TIME_WAIT</td></tr>
+</table><p>
+<br>
+
+<h2>TCP traffic (Lower rows 4 - 6)</h2>
+The amount of incoming data and outgoing data in packet transfer via a socket are displayed.<br>
+When the app setting <b>CONNECTION MONITORING</b> is enabled, it is displayed with TCP socket other than CLOSED status.<br>
+But, these rows disapper when becomes a listening socket. <p>
+
+The value of the following parameters obtained TCP_CONNECTION_INFO option is displayed.<p>
+
+<table>
+<tr><th>Traffic</th><th>Parameter</th><th>Description</th></tr>
+<tr><td><b>RX</b></td><td>tcpi_rxbytes<br>tcpi_rxpackets</td><td>Data size in incoming traffic (bytes / packets)</td></tr>
+<tr><td><b>TX</b></td><td>tcpi_txbytes<br>tcpi_txpackets</td><td>Data size in outgoing traffic (bytes / packets)</td></tr>
+<tr><td><b>Retransmit</b></td><td>tcpi_txretransmitbytes<br>tcpi_txretransmitpackets</td><td>Retransmitted data size in outging traffic (bytes / packets)</td></tr>
+</table><p>
+<br>
+
+<h2>TCP RTT (Lower row 7)</h2>
+The average and most recent RTT (milisecond accuracy) in TCP communication are displayed.<br>
+When the app setting <b>CONNECTION MONITORING</b> is enabled, it is displayed with TCP socket other than CLOSED status.<br>
+But, this row disappers when becomes a listening socket.<p>
+
+The value of parameters tcpi_srtt (average RTT) and tcpi_rttcur (most recent RTT) obtained TCP_CONNECTION_INFO option is displayed.<p>
+<br>
+
+<h2>Events bitmask (Lower row 8)</h2>
+The bit mask of response events by polling are displayed.<br>
+If there are some events, the corresponding event bit is highlighted.<br>
+This information is utilized due to confirm the presence of incoming data or error and judge completion of asynchronous processing.<p>
+
+[Supplement]<br>
+Three types of polling are available in this app.
+<ul>
+<li>polling for all sockets (See above)
+<li>polling with specifying request events and timeout value (See <a>Chapter 2. Socket Funtions</a>)
+<li>polling executed automatically when the app setting <b>Polling</b> is enabled (See <a>Chapter 7. Menu</a>)
+</ul><p>
+
+<br>
+<center><hr>
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    English | <a href="Chapter1_ja.html">Japanese</a>
+</center>
+</body>
+</html>

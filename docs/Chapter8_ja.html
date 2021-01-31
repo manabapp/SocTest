@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Chapter 8. Menu (Japanese)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>第8章 Menu<br><a href="help_ja.html">SOCTEST - USER'S GUIDE</a></center><br>
+
+本章では、メニュー機能について説明します。<p>
+
+アプリの環境設定、ログ画面、および 各種情報についての機能があります。<p>
+
+<h1>環境設定（PREFERENCES）</h1>
+アプリの動作設定および画面設定を変更します。<p>
+
+<table>
+<tr><th>パラメータ</th><th>説明</th></tr>
+<tr><td><b>DESCRIPTION</b></td><td>各画面に説明文を追加表示します。<br>説明文は端末の設定言語で表示します。[設定] &gt; [SocTest] で優先する言語を変更することもできます。<br>また、トップ画面にソケットパラメータ情報を追加表示します。詳細は、<a href="Chapter1_ja.html">第1章 Socket Simulator</a> を参照してください。</td></tr>
+<tr><td><b>AUTO<br>MONITORING</b></td><td>着信データ、接続処理、全二重接続状態、および TCP ステータス等を監視し、トップ画面に反映します。詳細は、後述します。<br>トップ画面の表示内容の詳細は、<a href="Chapter1_ja.html">第1章 Socket Simulator</a> を参照してください。</td></tr>
+<tr><td><b>IDLE TIMER</b></td><td>iOS のアイドルタイマーを無効にします。<br>この機能は、アプリがスリープ状態に移行することによる接続断を避けるために使用します。</td></tr>
+<tr><td><b>SCREEN COLOR</b></td><td>データ表示ビュー（バイナリエディタやログ画面など）の背景色を反転させます。<br>無効の場合は、端末設定の外観モード（ライト / ダーク）に合わせます。</td></tr>
+<tr><td><b>SYSTEM CALL<br>TRACE</b></td><td>システムコールトレースの出力レベルを選択します。詳細は後述します。</td></tr>
+</table>
+<br>
+
+<b>AUTO MONITORING</b> 機能の詳細について説明します。<br>
+この設定を有効にした場合、以下に示す状態を監視します。この場合、アプリが自動的に poll(2)、getsockopt(2)、および getsockname(2) を発行することに留意してください。<br>
+なお、ソケットの挙動を正確に観測する必要がある場合は、この設定を無効にして使用することを推奨します。<p>
+
+<ol>
+<li>着信データ / 接続要求の有無</li>
+各システムコールの発行後に当該ソケットの状態を polling します。<br>
+この polling は、POLLIN|POLLPRI|POLLOUT を監視対象としてタイムアウト 0 秒で poll(2) を発行します。<p>
+    
+<li>ソケットアドレス</li>
+カーネルによってソケットに割り当てられる自側アドレスを調べます。<br>
+connect(2) または listen(2) が発行された後、getsockname(2) でアドレスを取得します。<p>
+
+<li>ソケット接続状態</li>
+接続処理の結果および全二重接続の状態を監視します。<br>
+また、non-blocking ソケットで接続処理中の場合、poll(2) と getsockopt(2) により接続状態を判定します。<br>
+状態遷移の詳細については、<a href="Chapter1_ja.html">第1章 Socket Simulator</a> を参照してください。<p>
+
+<li>TCP ステータス / TCP トラフィック量 / TCP RTT</li>
+TCP ソケットに紐づくコネクションの状態、送受信トラフィック量、および RTT を監視します。<br>
+各システムコールが発行された後、getsockopt(2) で TCP 情報（TCP_CONNECTION_INFO）を取得します。<p>
+</ol><p>
+<br>
+
+<h1>ログ（LOG）</h1>
+アプリからソケットシステムコールが発行されると、システムコールのトレースログが出力されます。<br>
+ログ画面でトレースログを参照できます。<br>
+行が折り返される場合は、端末を横向きにしてご覧ください。<p>
+
+[補足]<br>
+アプリのエラーログも同じ画面に出力されます。エラーログは、アプリ自身に問題が発生したことを意味します。<br>
+メモリ使用量を抑えるために 10000 行に達した場合は末行に <b>Reached the limit of log lines</b> が出力され、それ以降のトレースログの出力が停止します。この場合、<b>消去</b> をタップすることでリセットできます。<p>
+<br>
+
+ログ出力のフォーマットは以下の通りです。<ul>
+<li>トレースログのフォーマット
+    <hr>
+    <b style="font-family:'Courier New'";> MMM dd HH:mm:ss.SSS [response] function(arg1, arg2, ...) = retval</b>
+    <hr>
+<li>エラーログのフォーマット
+    <hr>
+    <b style="font-family:'Courier New'";> MMM dd HH:mm:ss.SSS [ERROR___] 任意のエラーメッセージ</b>
+    <hr>
+</ul>
+
+<p>
+
+出力例を以下に示します。<p>
+
+<table><tr><td style="white-space:normal;">Oct 11 15:52:19.719 [0.000521] socket(PF_INET, SOCK_STREAM, IPPROTO_TCP) = 5<br>
+Oct 11 15:52:23.929 [0.000537] getsockopt(5, SOL_SOCKET, SO_DONTROUTE, [0], [4]) = 0<br>
+Oct 11 15:52:25.790 [0.000102] setsockopt(5, SOL_SOCKET, SO_DONTROUTE, [1], 4) = 0<br>
+Oct 11 15:52:32.035 [0.000221] connect(5, {sin_family=AF_INET, sin_port=9999, sin_addr="12.34.56.78"}, 16) = -1  Err#51 ENETUNREACH<br>
+Oct 11 15:52:36.371 [0.006439] poll([{fd=5, events=POLLIN|POLLPRI|POLLOUT, revents=0}], 1, 0) = 0<br>
+Oct 11 15:52:39.736 [0.000100] close(5) = 0</td></tr></table><p>
+
+各カラムについて説明します。<p>
+
+<table>
+<tr><th>カラム</th><th>説明</th></tr>
+<tr><td><b>MMM dd</b><br>発行日</td><td>システムコールを発行した日（月：Jan, Feb, ...）</td></tr>
+<tr><td><b>HH:mm:ss.SSS</b><br>発行時刻</td><td>システムコールが復帰した時刻（精度: ミリ秒）<br>端末のタイムゾーン設定に応じたローカル時刻で出力されます。</td></tr>
+<tr><td><b>response</b><br>レスポンス時間</td><td>システムコールの所要時間（精度: マイクロ秒）</td></tr>
+<tr><td><b>function</b><br>システムコール名</td><td>システムコール一覧画面で指定可能のものに加え、ソケット作成時の socket(2) と削除時の close(2) があります。</td></tr>
+<tr><td><b>arg1, arg2, ...</b><br>引数パラメータ</td><td>システムコールに指定したパラメータ<br>詳細は後述します。</td></tr>
+<tr><td><b>retval</b><br>復帰値</td><td>システムコールの復帰値が表示されます。<br>エラー発生時（-1 で復帰）には、続けて以下が表示されます。<br><br>&nbsp;&nbsp;<b>Err#</b>&lt;<i>errno number</i>&gt; &lt;<i>errno name</i>&gt;</td></tr>
+</table><p>
+<br>
+
+引数パラメータ表記の仕様は以下のとおりです。
+
+<h2>整数</h2>
+整数を値渡しで指定するパラメータは、定数名（define 名）または数値で出力されます。<br>
+出力パラメータとしてアドレス渡しする場合は、<b>[出力値]</b> と出力されます。<p>
+
+<h2>構造体</h2>
+構造体をアドレス渡しで指定するパラメータは、<b>{key1=value1, key2=value2, ...}</b> のように各メンバの変数名と値が出力されます。<p>
+
+[補足]<ul>
+<li>in_addr 構造体は、<b>{s_addr=XXXX}</b> ではなく、<b>"X.X.X.X"</b> という IPv4 アドレス形式で出力されます。
+<li>sockaddr_in 構造体は、sin_len と sin_zero が省略されます。
+<li>sockaddr_un 構造体は、sun_len が省略されます。
+<li>tcp_connection_info 構造体は、tcpi_state 以外が省略されます。
+</ul><p>
+
+<h2>構造体配列</h2>
+構造体配列をアドレス渡しで指定するパラメータは、<b>[{element1}, {element2}, ...]</b> と出力されます。<br>
+各 element は、上述の構造体の表記に従います。<p>
+
+<h2>バッファー（バイト配列）</h2>
+sendXXX(2) および recvXXX(2) における送受信データなど、任意のバッファー（主に void*）をアドレス渡しで指定します。<br>
+このようなパラメータは、<b>SYSTEM CALL TRACE</b> の設定に応じて以下のように出力されます。<p>
+
+<table>
+<tr><th>出力レベル</th><th>説明</th></tr>
+<tr><td><b>レベル 1</b></td><td>データを出力しません。<br>システムコールの引数には、<b>&lt;DATA&gt;</b> と出力されます。</td></tr>
+<tr><td><b>レベル 2</b></td><td>バイト配列の先頭最大 16 バイトまでを出力します。<br>システムコールの引数には、<b>"xxxxxxx"</b> のように文字列で出力されます。各バイトが印字可能な Ascii コード範囲であれば Ascii に置き換え、それ以外を ドット(.) で出力されます。</td></tr>
+<tr><td><b>レベル 3</b></td><td>システムコールの次の行に、最大 512 バイトまで 16 進ダンプで出力されます。</td></tr>
+</table><p>
+<br>
+
+
+<h1>情報（INFORMATION）</h1>
+各種情報を掲載しています。
+
+<h2>About App</h2>
+アプリのバージョン情報。<p>
+
+<h2>errno</h2>
+iOS におけるエラー番号および対応メッセージの一覧。<p>
+
+<h2>man</h2>
+ソケットインターフェースのマニュアル（Apple Inc. サイトへのリンク）。<p>
+
+<h2>Help</h2>
+本書。アプリのユーザーズガイド（Github Pages サイトへのリンク）。<p>
+
+<h2>Privacy Policy</h2>
+アプリのプライバシーポリシー（Github Pages サイトへのリンク）。<p>
+
+<h2>Terms of Service</h2>
+アプリの利用規約（Github Pages サイトへのリンク）。<p>
+
+<br>
+<center><hr>
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    <a href="Chapter8.html">English</a> | 日本語
+</center>
+</body>
+</html>

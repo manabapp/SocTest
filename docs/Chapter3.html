@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Chapter 3. Socket Simulator - Options</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>Chapter 3. Socket Simulator - Options<br><a href="help.html">SOCTEST - USER'S GUIDE</a></center><br>
+
+In this chapter, it describes about the options for socket.<p>
+
+SOL_SOCKET, IPPROTO_TCP, and IPPROTO_IP options can be used.<br>
+Please refer the man page or internet public site for the details of each option. See <a>Chapter 7. Menu</a> for details of man page.<p>
+<br>
+
+<h1>SOL_SOCKET options</h1>
+<table>
+<tr><th>Option name</th><th width=100%>Description</th></tr>
+<tr><td>SO_DEBUG</td><td>Enables recording of debugging information.</td></tr>
+<tr><td>SO_REUSEADDR</td><td>Enables local address reuse.</td></tr>
+<tr><td>SO_KEEPALIVE</td><td>Enables keep connections alive.</td></tr>
+<tr><td>SO_DONTROUTE</td><td>Enables routing bypass for outgoing messages.</td></tr>
+<tr><td>SO_BROADCAST</td><td>Enables permission to transmit broadcast messages.</td></tr>
+<tr><td>SO_USELOOPBACK</td><td>Enables communication by bypassing hardware.</td></tr>
+<tr><td>SO_LINGER</td><td>Linger on close if data present.</td></tr>
+<tr><td>SO_OOBINLINE</td><td>Enables reception of out-of-band data in band.</td></tr>
+<tr><td>SO_REUSEPORT</td><td>Enables bind the same port by multiple processes.</td></tr>
+<tr><td>SO_TIMESTAMP</td><td>Enables reciept of timestamp as a control message.</td></tr>
+<tr><td>SO_TIMESTAMP_MONOTONIC</td><td>Enables reciept of monotonically increasing timestamp as a control message.</td></tr>
+<tr><td>SO_SNDBUF</td><td>Buffer size for output (bytes).</td></tr>
+<tr><td>SO_RCVBUF</td><td>Buffer size for input (bytes).</td></tr>
+<tr><td>SO_SNDLOWAT</td><td>Minimum count for output (bytes).</td></tr>
+<tr><td>SO_RCVLOWAT</td><td>Minimum count for input (bytes).</td></tr>
+<tr><td>SO_SNDTIMEO</td><td>Timeout value for output (seconds).</td></tr>
+<tr><td>SO_RCVTIMEO</td><td>Timeout value for input (seconds).</td></tr>
+<tr><td>SO_ERROR</td><td>Gets and clears error on the socket (get only).</td></tr>
+<tr><td>SO_TYPE</td><td>Socket type (get only).<ul><li>SOCK_STREAM(1): Connection-based byte streams socket<li>SOCK_DGRAM(2): Connectionless datagrams socket</ul></td></tr>
+</table><p>
+<br>
+
+<h1>IPPROTO_TCP options</h1>
+<table>
+<tr><th>Option name</th><th width=100%>Description</th></tr>
+<tr><td>TCP_NODELAY</td><td>Segments always sent asap (Disables Nagle algorithm).</td></tr>
+<tr><td>TCP_MAXSEG</td><td>Maximum segment size (bytes) for outgoing TCP packets.</td></tr>
+<tr><td>TCP_NOOPT</td><td>Disables TCP option.</td></tr>
+<tr><td>TCP_NOPUSH</td><td>Disables immediately sending data with PUSH bit.</td></tr>
+<tr><td>TCP_KEEPALIVE</td><td>Idle time (seconds) before keep-alive probes are sent.<br>Same as TCP_KEEPIDLE in Linux.</td></tr>
+<tr><td>TCP_CONNECTIONTIMEOUT</td><td>Sets timeout (seconds) value for connection.</td></tr>
+<tr><td>TCP_RXT_CONNDROPTIME</td><td>Time (seconds) after which TCP retransmission will be stopped.</td></tr>
+<tr><td>TCP_RXT_FINDROP</td><td>Drops connection after retransmitting FIN 3 times.</td></tr>
+<tr><td>TCP_KEEPINTVL</td><td>Time (seconds) between individual keep-alive probes.</td></tr>
+<tr><td>TCP_KEEPCNT</td><td>Maximum number of keep-alive probes.</td></tr>
+<tr><td>TCP_SENDMOREACKS</td><td>Sends a TCP acknowledgement for every data.</td></tr>
+<tr><td>TCP_ENABLE_ECN</td><td>Uses explicit congestion notification (ECN).</td></tr>
+<tr><td>TCP_FASTOPEN</td><td>Requests kernel to use TFO for the server socket.</td></tr>
+<tr><td>TCP_CONNECTION_INFO</td><td>Gets TCP connection level statistics (get only).</td></tr>
+<tr><td>TCP_NOTSENT_LOWAT</td><td>Unsent and unacknowledged data size (bytes) in send buffer.</td></tr>
+</table><p>
+<br>
+
+<h1>IPPROTO_IP options</h1>
+<table>
+<tr><th>Option name</th><th width=100%>Description</th></tr>
+<tr><td>IP_OPTIONS</td><td>Gets IP options on incoming IP packets.<br>If some option are exist, displays the contents in hex dump.<br><br>Sets / clears IP options on each outgoin IP packet.<br>Content of a option needs to be registed in Data Manager beforehand.</td></tr>
+<tr><td>IP_TOS</td><td>Sets the type-of-service field in IP header.</td></tr>
+<tr><td>IP_TTL</td><td>Sets the time-to-live (hops) field in IP header.</td></tr>
+<tr><td>IP_RECVOPTS</td><td>Enables reciept of all IP options as a control message.</td></tr>
+<tr><td>IP_RECVRETOPTS</td><td>Enables reciept of IP options as a control message for response.</td></tr>
+<tr><td>IP_RECVDSTADDR</td><td>Enables reciept of destination IP address as a control message.</td></tr>
+<tr><td>IP_MULTICAST_IF</td><td>Sets the IP address of interface which multicast datagram is sent.</td></tr>
+<tr><td>IP_MULTICAST_TTL</td><td>Changes the TTL for outgoing multicast datagrams (range: 0 through 255).</td></tr>
+<tr><td>IP_MULTICAST_LOOP</td><td>Enables looped back by the IP layer for local delivery.</td></tr>
+<tr><td>IP_ADD_MEMBERSHIP</td><td>Joins a multicast group (set only).</td></tr>
+<tr><td>IP_DROP_MEMBERSHIP</td><td>Drops a multicast group membership (set only).</td></tr>
+<tr><td>IP_PORTRANGE</td><td>Sets the range of local port numbers.<ul><li>IP_PORTRANGE_DEFAULT(0): default range, normally 1024 through 5000<li>IP_PORTRANGE_HIGH(1): high range, normally 49152 through 65535<li>IP_PORTRANGE_LOW(2): low range, normally from 1024 down to 1 in descending order (May be restricted to privileged processes on iOS kernel)</ul></td></tr>
+<tr><td>IP_RECVIF</td><td>Enables reciept of interface which datagram is receibed.</td></tr>
+<tr><td>IP_RECVTTL</td><td>Enables reciept of TTL as a control message.</td></tr>
+<tr><td>IP_PKTINFO<br>(IP_RECVPKTINFO)</td><td>Enables sending / reciept of pktinfo as a control message.</td></tr>
+<tr><td>IP_RECVTOS</td><td>Enables reciept of TOS as a control message.</td></tr>
+</table><p>
+
+<br>
+<center><hr>
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    English | <a href="Chapter3_ja.html">Japanese</a>
+</center>
+</body>
+</html>

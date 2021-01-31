@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Chapter 4. Socket Simulator - I/O (Japanese)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>第4章 Socket Simulator - I/O<br><a href="help_ja.html">SOCTEST - USER'S GUIDE</a></center><br>
+
+本章では、ソケットに対するデータの送受信機能（I/O 操作）について説明します。<p>
+
+送受信操作では、システムコールのパラメータとして以下に示す各種情報を指定します。<br>
+所定のパラメータを選択して実行するとシステムコールを発行します。<p>
+
+<ul>
+<li>正常復帰（0 以上が返却）した場合</li>
+次の画面に遷移し、送信データまたは受信データが 16進 ダンプで表示されます。<br>
+さらに、一部のシステムコールでは、送信元アドレスや制御メッセージが表示されます。<p>
+
+受信データは保存することができ、後から Data Manager で参照できます。詳細は、<a href="Chapter7_ja.html">第7章 Data Manager</a> を参照してください。<p>
+
+<li>エラー復帰（-1 が返却）した場合</li>
+ポップアップで errno および エラーメッセージが表示されます。<br>
+エラーの原因調査はユーザー自身で実施してください。<p>
+</ul><p>
+<br>
+
+<h1>アドレス</h1>
+sendto(2) または sendmsg(2) を使用する場合は、送信先アドレスを指定します。<br>
+なお、アドレスは事前に Address Manager で登録する必要があります。詳細は、<a href="Chapter6_ja.html">第6章 Address Manager</a> を参照してください。<p>
+
+recvfrom(2) または recvmsg(2) を使用する場合は、送信元アドレスを取得するかどうかを指定します。<p>
+<br>
+
+<h1>メッセージバッファー</h1>
+送信時にはデータ内容とデータサイズ、受信時にはバッファーサイズを指定します。<br>
+sendmsg(2) および recvmsg(2) を使用する場合は複数のデータまたはバッファーを指定できます。<p>
+
+誤操作によるパケット通信料の増加抑止のため、送信・受信共に最大サイズは 64KB に制限しています。<p>
+
+送信するデータ内容は以下の中から選択します。なお、カスタムデータは事前に Data Manager で作成・登録する必要があります。詳細は、<a href="Chapter7_ja.html">第7章 Data Manager</a> を参照してください。<p>
+<table>
+<tr><th>データ内容</th><th>詳細</th></tr>
+<tr><td>カスタムデータ</td><td>ユーザーが自由に指定可能</td></tr>
+<tr><td>All "0" の ASCII 文字列</td><td>00000000... </td></tr>
+<tr><td>連続した数値の ASCII 文字列</td><td>01234567890123456789...</td></tr>
+<tr><td>ランダムな数値の ASCII 文字列</td><td>0-9 のランダム値</td></tr>
+<tr><td>ランダムなアルファベットと数値の<br>ASCII 文字列</td><td>0-9a-zA-Z のランダム値</td></tr>
+<tr><td>印字可能でランダムな ASCII 文字列</td><td>0-9a-zA-Z&nbsp;!&quot;#$%&amp;&#39;()*+,-./:;&lt;=&gt;?@[\]^_`{|}~ のランダム値</td></tr>
+<tr><td>All 0 のバイナリデータ</td><td>0x00 0x00 0x00 0x00 ...</td></tr>
+<tr><td>All 1 のバイナリデータ</td><td>0xff 0xff 0xff 0xff ...</td></tr>
+<tr><td>ランダムなバイナリデータ</td><td>0x00-0xff のランダム値</td></tr>
+</table><p>
+<br>
+
+<h1>制御メッセージ</h1>
+sendmsg(2) を使用する場合に、補助データとして制御情報を送信できます。<br>
+また、recvmsg(2) を使用する場合に、受信する補助データのバッファーサイズを指定します。<p>
+
+<table>
+<tr><th><font color=gray>Level</font><br>Type</th><th>説明</th><th>Send</th><th>Recv</th></tr>
+<tr><td><font color=gray>SOL_SOCKET</font><br><b>SCM_RIGHTS</b></td><td>ファイルディスクリプターのリスト（32 ビット整数の配列データ）を UNIX ドメインソケットを通して渡す／受け取る</td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>SOL_SOCKET</font><br><b>SCM_TIMESTAMP</b></td><td>タイムスタンプ（timeval 構造体データ）を受け取る</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>SOL_SOCKET</font><br><b>SCM_CREDS</b></td><td>プロセスの認証情報（cmsgcred 構造体データ）を UNIX ドメインソケットを通して渡す／受け取る</td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>SOL_SOCKET</font><br><b>SCM_TIMESTAMP_MONOTONIC</b></td><td>モノトニッククロックのタイムスタンプを受け取る</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVOPTS</b></td><td>到着した全ての IP オプションを受け取る</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVRETOPTS</b></td><td>応答のための IP オプションを受け取る</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVDSTADDR</b></td><td>送信先 IP アドレスを受け取る</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RETOPTS</b></td><td>IP オプション情報（ip_opts 構造体データ）を指定して送信する／受け取る</td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVIF</b></td><td>受信データグラムのインターフェース情報（sockaddr_dl 構造体データ）を受け取る</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVTTL</b></td><td>TTL（8 ビット整数）を受け取る</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_PKTINFO</b></td><td>到着パケットに関する情報（ip_pktinfo 構造体データ）を指定して送信する／受け取る</td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVTOS</b></td><td>TOS（8 ビット整数）を受け取る</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+</table><p>
+<br>
+
+<h1>メッセージフラグ</h1>
+送受信の詳細動作を指定します。<br>
+以下に示す 0 個以上をフラグの論理和で指定します。<br>
+フラグの機能の詳細については、man page やインターネット公開サイトの情報を参考にしてください。<p>
+
+<table>
+<tr><th>フラグ</th><th>説明</th><th>Send</th><th>Recv</th><th>Msg</th></tr>
+<tr><td><b>MSG_OOB</b></td><td>OOB（out-of-band: 帯域外）データを送信する ／ OOB データの受信を要求する ／ OOB データを受信したことを示す</td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><b>MSG_DONTROUTE</b></td><td>直接接続されているネットワーク上のホストのみに送信する</td><td align=center><img src="img/Check.png"></td><td align=center></td><td align=center></td></tr>
+<tr><td><b>MSG_PEEK</b></td><td>受信キューからデータを削除せずにデータを返すことを要求する</td><td align=center></td><td align=center><img src="img/Check.png"></td><td align=center></td></tr>
+<tr><td><b>MSG_WAITALL</b></td><td>要求いっぱいのデータ到着まで操作を停止するよう要求する</td><td align=center></td><td align=center><img src="img/Check.png"></td><td align=center></td></tr>
+<tr><td><b>MSG_TRUNC</b></td><td>データがバッファーより大きかったためデータ末端部分が破棄されたことを示す</td><td align=center></td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><b>MSG_CTRUNC</b></td><td>補助データ用のバッファー不足により制御データの一部が破棄されたことを示す</td><td align=center></td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+</table>
+<ul>
+<li><b>Send</b>: sendXXX(2) で指定するフラグ
+<li><b>Recv</b>: recvXXX(2) で指定するフラグ
+<li><b>Msg</b>: recvmsg(2) から返却されるフラグ
+</ul><p>
+
+<br>
+<center><hr>
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    <a href="Chapter4.html">English</a> | 日本語
+</center>
+</body>
+</html>

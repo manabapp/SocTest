@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Chapter 4. Socket Simulator - I/O</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>Chapter 4. Socket Simulator - I/O<br><a href="help.html">SOCTEST - USER'S GUIDE</a></center><br>
+
+In this chapter, it describes about the I/O function via socket.<p>
+
+To send or receive data, sets the following information to the parameters of system call.<br>
+With executing after selecting predetermined parameter, system call is called.<p>
+
+<ul>
+<li>When succeeded (returned 0 or upper)</li>
+Moves to the data dump view, displays sent data or received data in hex dump.<br>
+For some system calls, a source address or a control messages is displayed futher if any.<p>
+
+Received data could be saved. You can refer the data in Data Manager later. See <a>Chapter 6. Data Manager</a> for details.<br>
+The maximum number of received data that can be registered is 16.<p>
+
+<li>When error occurred (returned -1)</li>
+It displays errno and error message in pop-up.<br>
+Need to investigate the cause of the error by yourself.<p>
+</ul><p>
+<br>
+
+<h1>Address</h1>
+When using sendto(2) or sendmsg(2), specifies the destination address.<br>
+Regists the address in Address Manager beforehand. See <a>Chapter 5. Address Manager</a> for details.<p>
+
+When using recvfrom(2) or recvmsg(2), specifies whether gets remote address<p>
+<br>
+
+<h1>Message buffer</h1>
+Specifies data content and data size if sending data, buffer size if receiving data.<br>
+When using sendmsg(2) or recvmsg(2), specifies multiple data / buffers.<br>
+When using sendfile(2), specifies a file which to you want send.<p>
+
+The maximum size is limited to 64 KB in order to prevent an increase in packet charges due to erroneous operation.<br>
+If you want to send a large amount of data, please use the bulk data transfer function in consideration of communication charges.<p>
+
+Selects data content from the followings. When using a customized data, regists in Data Manager beforehand. See <a>Chapter 6. Data Manager</a> for details.<p>
+
+<table>
+<tr><th>Data content</th><th>Details</th></tr>
+<tr><td>Customized data</td><td>User can customize freely.</td></tr>
+<tr><td>All "0" ascii string</td><td>00000000...</td></tr>
+<tr><td>Continuous numeric ascii string</td><td>01234567890123456789...</td></tr>
+<tr><td>Random numeric ascii string</td><td>Random of 0-9</td></tr>
+<tr><td>Random alphabet & numeric <br>ascii string</td><td>Random of 0-9a-zA-Z</td></tr>
+<tr><td>Random printable ascii string</td><td>Random of 0-9a-zA-Z&nbsp;!&quot;#$%&amp;&#39;()*+,-./:;&lt;=&gt;?@[\]^_`{|}~</td></tr>
+<tr><td>All 0 binary code</td><td>0x00 0x00 0x00 0x00 ...</td></tr>
+<tr><td>All 1 binary code</td><td>0xff 0xff 0xff 0xff ...</td></tr>
+<tr><td>Random binary code</td><td>Random of 0x00-0xff</td></tr>
+</table><p>
+<br>
+
+<h1>Control messages</h1>
+When using sendmsg(2), sends control messages as an ancillary data.<br>
+When using recvmsg(2), specifies the buffer size for an ancillary data.<p>
+
+Omits for details because these system calls is in preparation now.<p>
+<br>
+
+<h1>Message flags</h1>
+Specifies the I/O behavior with flags.<br>
+Specifies with the logical sum of 0 or more flags.<br>
+Please refer the man page or internet public site for the detail of each flags. See <a>Chapter 7. Menu</a> for detail of man page.<p>
+
+<table>
+<tr><th>Flag</th><th>Description</th><th>Send</th><th>Recv</th><th>Msg</th></tr>
+<tr><td><b>MSG_OOB</b></td><td>Sends OOB (out-of-band) data. / Requests receipt of OOB data. / Indicates receipt of OOB data.</td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><b>MSG_DONTROUTE</b></td><td>Sends to hosts only on directly connected networks.</td><td align=center><img src="img/Check.png"></td><td align=center></td><td align=center></td></tr>
+<tr><td><b>MSG_PEEK</b></td><td>Requests to return data without removing data from receive queue.</td><td align=center></td><td align=center><img src="img/Check.png"></td><td align=center></td></tr>
+<tr><td><b>MSG_WAITALL</b></td><td>Requests that operation block until receiving full data.</td><td align=center></td><td align=center><img src="img/Check.png"></td><td align=center></td></tr>
+<tr><td><b>MSG_TRUNC</b></td><td>Indicates that the trailing part of data was discarded because data was larger than buffer.</td><td align=center></td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><b>MSG_CTRUNC</b></td><td>Indicates that some control data were discarded because ancillary data buffer was lack.</td><td align=center></td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+</table>
+<ul>
+<li><b>Send</b>: specifies flag with sendXXX(2)
+<li><b>Recv</b>: specifies flag with recvXXX(2)
+<li><b>Msg</b>: flag returned with recvmsg(2)
+</ul><p>
+
+<br>
+<center><hr>
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    English | <a href="Chapter4_ja.html">Japanese</a>
+</center>
+</body>
+</html>

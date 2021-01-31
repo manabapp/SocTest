@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Chapter 8. Menu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>Chapter 8. Menu<br><a href="help.html">SOCTEST - USER'S GUIDE</a></center><br>
+
+In this chapter, describes the functions of Menu.<p>
+
+There are app's preferences, log viewer, and some information.<p>
+
+
+<h1>PREFERENCES</h1>
+Changes setting for app operating and user interface.<p>
+
+<table>
+<tr><th colspan=2>Parameter</th><th>Description</th></tr>
+<tr><td colspan=2><b>SHOW<br>DESCRIPTION</b></td><td>Shows description article in each view.<br>And, the additional information, Socket parameters, is displayed in socket list. See <a>Chapter 1. Top View</a> for details.</td></tr>
+<tr><td colspan=2><b>CONNECTION<br>MONITORING</b></td><td>Monitors the following status, reflects them in Top View. Details is described later.<br>See <a>Chapter 1. Top View</a> for details of Top View.</td></tr>
+<tr><td colspan=2><b>AUTO POLLING</b></td><td>Polls the socket just after each operation, reflects the returning events in Top View.<br>And, polls the socket before operation if needs, alerts to user. Details is described later.<br>In these polling, it calls poll(2) with POLLIN|POLLPRI|POLLOUT as request events and 0 seconds as timeout.<br>See <a>Chapter 1. Top View</a> for details of Top View.</td></tr>
+<tr><td colspan=2><b>IDLE TIMER</b></td><td>Turns off iOS's idle timer.<br>To avoid disconnection, disables this setting.</td></tr>
+<tr><td colspan=2><b>SCREEN COLOR</b></td><td>Inverts the background color of each data view (binary editor view, log view, etc).<br>When disabled, displays in iOS device's appearance (Light or Dark).</td></tr>
+<tr><td rowspan=2><b>LOG LEVEL</b></td><td><b>Error</b></td><td>App's error log is output.<br>Refers the output content in log view.<br>It recommend that error log is always enabled, because this log means that something wrong with the app itself occurs.</td></tr>
+<tr><td><b>Debug</b></td><td>App's debug log is output.<br>When the app setting <b>Error</b> log is only enabled, usable. Refers the output content in log view.<br>Debug log is for this app developer.</td></tr>
+</table><p>
+<br>
+It discribes the details of <b>CONNECTION MONITORING</b> and <b>AUTO POLLING</b>.<br>
+If you need to watch exactly a socket behavior, it recommends that disabling these setting.<p>
+
+<h2>CONNECTION MONITORING</h2>
+If enables this parameter, the following status is monitored.<br>
+Keep in mind that the app will automatically calls getsockopt(2) and getsockname(2).<p>
+
+<ol>
+<li>Socket address</li>
+Finds out own address which assigned by kernel.<br>
+Gets a address with getsockname(2) after connect(2) is called.<p>
+<li>Socket connection status</li>
+Monitors the result of connect processing and the state of full duplex.<br>
+In connect in progress for a non-blocking socket, checks the connection status with getsockopt(2) after poll(2) is called.<br>
+See <a>Chapter 1. Top View</a> for details of status transition.<p>
+<li>TCP state / TCP traffic / TCP RTT</li>
+Monitors the state of the connection associated with a TCP socket, the amount of data sent and received via a socket, and RTT.<br>
+Gets a TCP information (TCP_CONNECTION_INFO) with getsockopt(2) after each system call is called.
+</ol><p>
+
+<h2>AUTO POLLING</h2>
+If enables this parameter, polls before calling the followings for a blocking socket.<br>
+Then, alerts to you if there is a possibility of inoperable.<br>
+Keep in mind that the app will automatically calls poll(2).<p>
+
+<ol>
+<li>accept</li>
+If POLLIN is not set, alerts to user before accept(2) is called.<p>
+<li>send</li>
+If POLLOUT is not set, alerts to user before sendXXX(2) is called.<p>
+<li>recv</li>
+If both of POLLIN or POLLPRI are not set, alerts to user before recvXXX(2) is called.<p>
+</ol><p>
+<br>
+
+
+
+<h1>LOG</h1>
+When the app executes socket system calls, trace log of the system call is output.<br>
+Trace log can be referd in log view.<br>
+If a line wraps, please look in landscape.<p>
+
+[Supplement]<br>
+Error log and debug log also are output here if enables them.<p>
+About debug log, a large amount of log is output. Because it needs to reduce memory usage, no further log are output after the number of lines reaches 10000. At the end of log, <b>Reached the limit of log lines</b> is output. But, log restarts by resetting.<p>
+
+Format of trace log is as below.<p>
+
+<hr>
+<b style="font-family:'Courier New'";> MMM dd HH:mm:ss.SSS [response] function(arg1, arg2, ...) = retval</b>
+<hr>
+<p>
+
+Output example of trace log is as below.<p>
+
+<table><tr><td style="white-space:normal;">Oct 11 15:52:19.719 [0.000521] socket(PF_INET, SOCK_STREAM, IPPROTO_TCP) = 5<br>
+Oct 11 15:52:23.929 [0.000537] getsockopt(5, SOL_SOCKET, SO_DONTROUTE, [0], [4]) = 0<br>
+Oct 11 15:52:25.790 [0.000102] setsockopt(5, SOL_SOCKET, SO_DONTROUTE, [1], 4) = 0<br>
+Oct 11 15:52:32.035 [0.000221] connect(5, {sin_family=AF_INET, sin_port=9999, sin_addr="12.34.56.78"}, 16) = -1  Err#51 ENETUNREACH<br>
+Oct 11 15:52:36.371 [0.006439] poll([{fd=5, events=POLLIN|POLLPRI|POLLOUT, revents=0}], 1, 0) = 0<br>
+Oct 11 15:52:39.736 [0.000100] close(5) = 0</td></tr></table><p>
+
+It discribes each colmun.<p>
+
+<table>
+<tr><th>Colmun</th><th>Description</th></tr>
+<tr><td><b>MMM dd</b><br>Call Date</td><td>Date which calls the system call.<br>Month: Jan, Feb, ...</td></tr>
+<tr><td><b>HH:mm:ss.SSS</b><br>Call Time</td><td>Time that the system call returned (milisecond accuracy).<br>This is a local time depending on device's timezone setting.</td></tr>
+<tr><td><b>response</b><br>Response Time</td><td>Indicates the time required for system call's process (microsecond accuracy).</td></tr>
+<tr><td><b>function</b><br>System call Name</td><td>Indicates the name of system calls.<br>There are the system calls which selectable in the list (see <a>Chapter 2. Socket Functions</a>), socket(2) used to create a socket, and close(2) used to delete a socket.</td></tr>
+<tr><td><b>arg1, arg2, ...</b><br>Argument Parameters</td><td>Indicates the values specified to system call.<br>It described later in details.</td></tr>
+<tr><td><b>retval</b><br>Reterun value</td><td>Indicates the reterun value of system call.<br>When error occurred (returned -1), displays the following information.<br><br>&nbsp;&nbsp;<b>Err#</b>&lt;<i>errno number</i>&gt; &lt;<i>errno name</i>&gt;</td></tr>
+</table><p>
+<br>
+
+The specification for notation of argument parameters is as below.<p>
+
+<h2>Integer</h2>
+Integer parameter passing by value is output with define name or digit.<br>
+In the case of passing by reference as output parameter, it is output as <b>[output value]</b>.<p>
+
+<h2>Structure</h2>
+Structure parameter passing by reference is output as <b>{key1=value1, key2=value2, ...}</b>.<p>
+
+[Supplement]
+<ul>
+<li>in_addr structure is output as <b>"X.X.X.X"</b> instead of <b>{s_addr=XXXX}</b>.
+<li>sockaddr_in structure is output without sin_len and sin_zero.
+<li>sockaddr_un structure is output without sun_len.
+<li>tcp_connection_info structure is output with only tcpi_state.
+</ul><p>
+
+<h2>Array of structure</h2>
+Array parameter passing by reference is output as <b>[{element1}, {element2}, ...]</b>.<br>
+Each element is followed the structure notation above.<p>
+
+<h2>Buffer (Bytes array)</h2>
+In buffer parameter (mainly void*) passing by reference, up to the first 16 bytes of bytes array is output as a string <b>"xxxxxxx"</b>.<br>
+The byte is replaced with Ascii if a byte is printable Ascii code, and resplaced with dot(.) otherwise.<p>
+<br>
+
+
+<h1>INFORMATION</h1>
+Some information is posted.
+
+<h2>About App</h2>
+Overview of App.<p>
+
+<h2>Man Pages</h2>
+Manuals of socket interface (hyperlink to Apple public site).<p>
+
+<h2>errno</h2>
+Error define value and corresponded messages in iOS.<p>
+
+<h2>Help</h2>
+Users guide for this app (this article).<p>
+
+<h2>Version</h2>
+App version information.<p>
+
+<h2>Terms of Service</h2>
+App Terms of service.<p>
+
+<br>
+<center><hr>
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    English | <a href="Chapter8_ja.html">Japanese</a>
+</center>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Chapter 3. Socket Simulator - Options (Japanese)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>第3章 Socket Simulator - Options<br><a href="help_ja.html">SOCTEST - USER'S GUIDE</a></center><br>
+
+本章では、ソケットオプションについて説明します。<p>
+
+このアプリでは、SOL_SOCKET、IPPROTO_TCP、IPPROTO_UDP、および IPPROTO_IP のオプションに対応しています。<br>
+各オプションの機能詳細については、man page やインターネット公開サイトの情報も併せて参考にしてください。<p>
+<br>
+
+<h1>SOL_SOCKET オプション</h1>
+<table>
+<tr><th>オプション名</th><th width=100%>説明</th></tr>
+<tr><td>SO_DEBUG</td><td>ソケットのデバッグ機能を有効にする。</td></tr>
+<tr><td>SO_ACCEPTCONN</td><td>ソケットがリスニング中かどうかを返す（取得のみ）。</td></tr>
+<tr><td>SO_REUSEADDR</td><td>ローカルアドレスの再利用を可能にする。</td></tr>
+<tr><td>SO_KEEPALIVE</td><td>ソケットに対する keep-alive プローブの送信を有効にする。</td></tr>
+<tr><td>SO_DONTROUTE</td><td>直接接続されているホストにのみ送信する。</td></tr>
+<tr><td>SO_BROADCAST</td><td>ブロードキャストアドレスへデータグラムの送信を許可する。</td></tr>
+<tr><td>SO_USELOOPBACK</td><td>ハードウェアをバイパスして通信する機能を有効にする。</td></tr>
+<tr><td>SO_LINGER</td><td>データがすべて送信完了またはタイムアウトするまで返らなくする。</td></tr>
+<tr><td>SO_OOBINLINE</td><td>帯域外（out-of-band）データを受信データストリームに置く。</td></tr>
+<tr><td>SO_REUSEPORT</td><td>1 つのポートを複数プロセスで bind することを可能にする。</td></tr>
+<tr><td>SO_TIMESTAMP</td><td>タイムスタンプを制御メッセージで受け取る。</td></tr>
+<tr><td>SO_TIMESTAMP_MONOTONIC</td><td>モノトニッククロックのタイムスタンプを制御メッセージで受け取る。</td></tr>
+<tr><td>SO_SNDBUF</td><td>ソケットの送信バッファーの最大サイズ（バイト単位）。</td></tr>
+<tr><td>SO_RCVBUF</td><td>ソケットの受信バッファーの最大サイズ（バイト単位）。</td></tr>
+<tr><td>SO_SNDLOWAT</td><td>送信バッファー中に溜められるデータの最小値（バイト単位）。</td></tr>
+<tr><td>SO_RCVLOWAT</td><td>受信バッファー中に溜められるデータの最小値（バイト単位）。</td></tr>
+<tr><td>SO_SNDTIMEO</td><td>送信タイムアウト（秒単位）。</td></tr>
+<tr><td>SO_RCVTIMEO</td><td>受信タイムアウト（秒単位）。</td></tr>
+<tr><td>SO_ERROR</td><td>保留のソケットエラーを取得してクリアする（取得のみ）。</td></tr>
+<tr><td>SO_TYPE</td><td>ソケットタイプ（取得のみ）。<ul><li>SOCK_STREAM(1): 双方向接続のバイトストリーム型ソケット<li>SOCK_DGRAM(2): コネクションレスのデータグラム型ソケット</ul></td></tr>
+<tr><td>SO_NUMRCVPKT</td><td>SOCK_DGRAM ソケットのバッファー内の受信データグラム数（取得のみ）。</td></tr>
+<tr><td>SO_NET_SERVICE_TYPE</td><td>Network service type.<ul><li>NET_SERVICE_TYPE_BE(0): Best effort<li>NET_SERVICE_TYPE_BK(1): Background system initiated<li>NET_SERVICE_TYPE_SIG(2): Signaling<li>NET_SERVICE_TYPE_VI(3): Interactive Video<li>NET_SERVICE_TYPE_VO(4): Interactive Voice<li>NET_SERVICE_TYPE_RV(5): Responsive Multimedia Audio/Video<li>NET_SERVICE_TYPE_AV(6): Multimedia Audio/Video Streaming<li>NET_SERVICE_TYPE_OAM(7): Operations, Administration, and Management<li>NET_SERVICE_TYPE_RD(8): Responsive Data</ul></td></tr>
+<tr><td>SO_NETSVC_MARKING_LEVEL</td><td>Get QoS marking in effect for socket.（取得のみ）<ul><li>0: The outgoing network interface is not known<li>1: Default marking at layer 2 (for example Wi-Fi WMM)<li>2: Layer 3 DSCP marking and layer 2 marking for all Network Service Types<li>3: The system policy limits layer 3 DSCP marking and layer 2 marking to background Network Service Types</ul></td></tr>
+</table><p>
+<br>
+
+<h1>IPPROTO_TCP オプション</h1>
+<table>
+<tr><th>オプション名</th><th width=100%>説明</th></tr>
+<tr><td>TCP_NODELAY</td><td>各セグメントが可能な限り早く送信されるようにする（Nagle アルゴリズムを無効にする）。</td></tr>
+<tr><td>TCP_MAXSEG</td><td>送出 TCP パケットの最大セグメントサイズ（バイト単位）。</td></tr>
+<tr><td>TCP_NOOPT</td><td>TCP オプションを無効にする。</td></tr>
+<tr><td>TCP_NOPUSH</td><td>PUSH ビットをセットした即時データ送信を無効にする。</td></tr>
+<tr><td>TCP_KEEPALIVE</td><td>keep-alive プローブ送信前に維持するアイドル時間（秒単位）。<br>Linux の TCP_KEEPIDLE と同じ。</td></tr>
+<tr><td>TCP_CONNECTIONTIMEOUT</td><td>接続タイムアウト（秒単位）。</td></tr>
+<tr><td>TCP_RXT_CONNDROPTIME</td><td>TCP 再送が停止するまでの時間（秒単位）。</td></tr>
+<tr><td>TCP_RXT_FINDROP</td><td>FIN 再送を 3 回実施後にコネクッションを破棄する。</td></tr>
+<tr><td>TCP_KEEPINTVL</td><td>各 keep-alive プローブの間隔（秒単位）。</td></tr>
+<tr><td>TCP_KEEPCNT</td><td>keep-alive プローブの最大回数。</td></tr>
+<tr><td>TCP_SENDMOREACKS</td><td>データ受信毎に ACK 応答する。</td></tr>
+<tr><td>TCP_ENABLE_ECN</td><td>明示的な輻輳通知（ECN）を有効にする。</td></tr>
+<tr><td>TCP_FASTOPEN</td><td>サーバーソケットで TFO（TCP Fast Open）を使用するように要求する。</td></tr>
+<tr><td>TCP_CONNECTION_INFO</td><td>TCP 接続レベルの統計情報を取得する（取得のみ）。</td></tr>
+<tr><td>TCP_NOTSENT_LOWAT</td><td>送信バッファー内の未送信データサイズを制限する（バイト単位）。</td></tr>
+</table><p>
+<br>
+
+
+<h1>IPPROTO_UDP オプション</h1>
+<table>
+<tr><th>オプション名</th><th width=100%>説明</th></tr>
+<tr><td>UDP_NOCKSUM</td><td>送信データグラムのチェックサムを無効にする。</td></tr>
+</table><p>
+<br>
+
+<h1>IPPROTO_IP オプション</h1>
+<table>
+<tr><th>オプション名</th><th width=100%>説明</th></tr>
+<tr><td>IP_OPTIONS</td><td>受信パケットの IP オプションを取得する。<br>オプションが設定されていれば、その内容を 16 進ダンプで表示する。<br><br>また、送信パケットの IP オプションを設定・クリアする。<br>設定する内容は、事前に Data Manager で作成・登録する必要がある。</td></tr>
+<tr><td>IP_HDRINCL</td><td>カーネルが IP ヘッダーを付加することを抑制する。</td></tr>
+<tr><td>IP_TOS</td><td>IP ヘッダー内のサービスタイプ（TOS: type-of-service）フィールドを設定する。</td></tr>
+<tr><td>IP_TTL</td><td>IP ヘッダー内の生存時間（TTL: time-to-live）フィールドを設定する（ホップ数）。</td></tr>
+<tr><td>IP_RECVOPTS</td><td>到着した全ての IP オプションを制御メッセージで受け取る。</td></tr>
+<tr><td>IP_RECVRETOPTS</td><td>応答のための IP オプションを制御メッセージで受け取る。</td></tr>
+<tr><td>IP_RECVDSTADDR</td><td>送信先 IP アドレスを制御メッセージで受け取る。</td></tr>
+<tr><td>IP_RETOPTS</td><td>補助データでの IP オプションの設定 / 受信を有効にする。</td></tr>
+<tr><td>IP_MULTICAST_IF</td><td>マルチキャストデータグラムを送信するインターフェースの IP アドレスを設定する。</td></tr>
+<tr><td>IP_MULTICAST_TTL</td><td>マルチキャストデータグラムの TTL を設定する（0 から 255 までの任意の値）。</td></tr>
+<tr><td>IP_MULTICAST_LOOP</td><td>マルチキャストデータグラムのローカルループバックを有効にする。</td></tr>
+<tr><td>IP_ADD_MEMBERSHIP</td><td>マルチキャストグループに参加する（設定のみ）。</td></tr>
+<tr><td>IP_DROP_MEMBERSHIP</td><td>マルチキャストグループから抜ける（設定のみ）。</td></tr>
+<tr><td>IP_PORTRANGE</td><td>ローカルポート番号の範囲を設定する。<ul><li>IP_PORTRANGE_DEFAULT(0): デフォルトのポート範囲、通常は 1024 から 5000<li>IP_PORTRANGE_HIGH(1): 大きなポート範囲、通常は 49152 から 65535<li>IP_PORTRANGE_LOW(2): 小さなポート範囲、通常は 1024 から 1 までの降順（iOS カーネルで特権プロセスに使用が限定されている可能性がある）</ul></td></tr>
+<tr><td>IP_RECVIF</td><td>受信データグラムのインターフェースを受け取る。</td></tr>
+<tr><td>IP_STRIPHDR</td><td>受信パケットから IP ヘッダーを除外する。</td></tr>
+<tr><td>IP_RECVTTL</td><td>補助メッセージでの TTL 受信を有効にする。</td></tr>
+<tr><td>IP_BOUND_IF</td><td>ソケットにインターフェースをバインドする。</td></tr>
+<tr><td>IP_PKTINFO<br>(IP_RECVPKTINFO)</td><td>補助データでの pktinfo の設定 / 受信を有効にする。</td></tr>
+<tr><td>IP_RECVTOS</td><td>補助メッセージでの TOS 受信を有効にする。</td></tr>
+<tr><td>IP_DONTFRAG</td><td>IP フラグメントを禁止する。</td></tr>
+</table><p>
+
+<br>
+<center><hr>
+    Copyright © 2021 manabapp. All rights reserved.<br>
+    <a href="Chapter3.html">English</a> | 日本語
+</center>
+</body>
+</html>
