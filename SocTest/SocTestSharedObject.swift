@@ -21,7 +21,7 @@ class SocTestSharedObject: ObservableObject {
     @Published var isPollEventChecks = [Bool](repeating: false, count: SocTestCommonRow.pollEvents.count)
     @Published var isControlDataChecks = [Bool](repeating: false, count: SocTestCommonRow.controlDatas.count)
     @Published var isMsgFlagChecks = [Bool](repeating: false, count: SocTestCommonRow.msgFlags.count)
-    @Published var isCmsgRetoptsChecks = [Bool](repeating: false, count: SocTestIODataManager.maxRegistNumber)
+    @Published var isDataChecks = [Bool](repeating: false, count: SocTestIODataManager.maxRegistNumber)
     @Published var deviceWidth: CGFloat = 0.0
     @Published var isAlerting: Bool = false
     @Published var alertMessage: String = ""

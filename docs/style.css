@@ -11,3 +11,5 @@ ol{padding-left:3.0em;}
 li{font-weight:none;}
 a{color:#007aff; text-decoration:none;}
 center a{color:#8e8e93; text-decoration:none;}
+.copyright{font-size:12px; color:#8e8e93; text-decoration:none; text-align:center;}
+.copyright a{font-size:12px; color:#8e8e93; text-decoration:underline; }

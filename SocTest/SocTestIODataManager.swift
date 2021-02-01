@@ -201,7 +201,7 @@ fileprivate struct DataEditor: View {
                 VStack {
                     HStack(alignment: .bottom) {
                         Text("ASCII")
-                            .font(.system(size: 16))
+                            .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(Color.init(UIColor.systemGray))
                             .padding(.leading, 8)
                             .padding(.bottom, 2)
@@ -221,7 +221,7 @@ fileprivate struct DataEditor: View {
                         .padding(.leading, 0)
                     HStack {
                         Text("HEX")
-                            .font(.system(size: 16))
+                            .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(Color.init(UIColor.systemGray))
                             .padding(.leading, 8)
                             .padding(.bottom, -3)
@@ -259,7 +259,7 @@ fileprivate struct DataEditor: View {
                     VStack(spacing: 3) {
                         HStack(alignment: .bottom) {
                             Text("ASCII")
-                                .font(.system(size: 16))
+                                .font(.system(size: 16, weight: .semibold))
                                 .foregroundColor(Color.init(UIColor.systemGray))
                                 .padding(.top, 5)
                                 .padding(.leading, 8)
@@ -269,7 +269,7 @@ fileprivate struct DataEditor: View {
                         SocTestScreen(text: self.$asciiText, isEditable: self.$isAsciiEditable, isDecodable: self.$isAsciiDecodable)
                         HStack {
                             Text("HEX")
-                                .font(.system(size: 16))
+                                .font(.system(size: 16, weight: .semibold))
                                 .foregroundColor(Color.init(UIColor.systemGray))
                                 .padding(.leading, 8)
                                 .padding(.bottom, -3)

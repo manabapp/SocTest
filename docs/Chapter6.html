@@ -11,76 +11,46 @@
 
 In this chapter, it describes about the address management.<p>
 
-In Address Manager view, creates and deletes an address.<br>
-And, confirms the IP address of your iOS device.<p>
-
-<h1>Confirms device address</h1>
-With tapping the row of <b>DEVICE ADDRESS</b>, redisplays the address.<br>
-In case an address switched between 3G/4G (Cellular) and Wi-Fi, you can check again the current IP address.<p>
-
-The IP address displayed in here is Cellular or W-Fi for external network communication.<p>
-<br>
+In Address Manager view, creates, deletes and rearranges an address.<p>
 
 <h1>Creation an address</h1>
-With tapping <b><img src="img/Add.png" height=36px>New Address</b>, moves to the next address input view and creats a new address.<br>
+With tapping <b>New Address</b>, moves to the next address input view and creats a new address.<br>
 The created addrsses are listed in Address Manager view.<p>
+
+The maximum number of addresses that can be registered is 32.<p>
 
 This app does an external network communication via IPv4 socket, and an inter process communication via UNIX domain socket.<br>
 Creates each in the AF_INET / AF_UNIX family address format, and uses it as the destination or listening address.<p>
+<br>
 
 <h2>AF_INET address</h2>
 Regists the pair of host and port number in address input view.<br>
-The maximum number of addresses that can be registered is 16.<p>
-
 If specifies host with a FQDN, you can regist only when the host name can be resolved with DNS. Other than that, no restrictions on registered addresses, including multicast and broadcast.<p>
 
-For doing IPv4 communication, the following network interfaces are avairable in iOS.<br>
 When you regist as a listening address, specifies the address of these interfaces or ANY address (0.0.0.0).<br>
-For a server socket, assigns the address with bind(2).<p>
-
-<img src="img/NetworkInterface.001.jpeg" width=100%>
-
-<table>
-<tr><th>Network<br>Interface</th><th>Description</th></tr>
-<tr><td>Cellular</td><td>Connects the Mobile carrier network provided by MNO, starts IPv4 communication.<br>
-Needs to enable the following settings.<p>
-<ul>
-<li>[Settings] &gt; [Cellular] &gt; [soctest], or
-<li>[Settings] &gt; [soctest] &gt; [Cellular Data]
-</ul></td></tr>
-<tr><td>Wi-fi</td><td>Connects the Wi-Fi network, starts IPv4 communication.</td></tr>
-<tr><td>Personal<br>Hotspot</td><td>Personal Hotspot feature allows an iOS device to work as a mobile router and connect (relay) other devices to the Cellular network.<br>
-With using the feature, you can start IPv4 communication between this app and other device on local network (172.20.10.0/28).<br>
-The IP address of interface is fixed to 172.20.10.1.<p>
-
-Needs to enable the following settings.<p>
-<ul>
-<li>[Settings] &gt; [Privacy] &gt; [Local Network] &gt; [soctest], or
-<li>[Settings] &gt; [soctest] &gt; [Local Network]
-</ul></td></tr>
-<tr><td>Loopback</td><td>With using 127.0.0.1 (hostname: localhost), starts IPv4 loopback communication.</td></tr>
-</table><p>
-<br>
+See <a href="Chapter5.html">Chapter 5. Interface Configuration</a> about an interace's address.<p>
 
 <h2>AF_UNIX address</h2>
-Specifies and regists a socket file name that is the substance of UNIX domain address.<br>
-The maximum number of addresses that can be registered is 16.<p>
-
+Specifies and regists a file name (UNIX path) that is the substance of UNIX domain address.<br>
 When an UNIX domain socket is assigned the address, a socket file will be created by kernel. Inter process communication is realized with this file.<p>
 
-[Supplement]<br>
-In general, specifies a full path as an address. But, this app uses a relative path.<br>
-If you want to know a current directory, confirms the debug log at app launching. See <a>Chapter 7. Menu</a> about the debug log.<p>
+[Note]<br>
+In general, specifies a full path as an address. But, this app uses a relative path.<p>
 <br>
 
 <h1>Deletion an address</h1>
 With swiping left a row, deletes the address.<br>
 When AF_UNIX address, deletes the corresponding socket file together.<p>
+<br>
+
+<h1>Rearranging addresses</h1>
+With tapping <b>Edit</b> at the top right to enter edit mode.<br>
+Reorders the addresses for ease of use.<p>
 
 <br>
-<center><hr>
+<hr><div class="copyright">
     Copyright © 2021 manabapp. All rights reserved.<br>
     English | <a href="Chapter6_ja.html">Japanese</a>
-</center>
+</div><br>
 </body>
 </html>

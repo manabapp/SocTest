@@ -19,8 +19,7 @@ With executing after selecting predetermined parameter, system call is called.<p
 Moves to the data dump view, displays sent data or received data in hex dump.<br>
 For some system calls, a source address or a control messages is displayed futher if any.<p>
 
-Received data could be saved. You can refer the data in Data Manager later. See <a>Chapter 6. Data Manager</a> for details.<br>
-The maximum number of received data that can be registered is 16.<p>
+Received data could be saved. You can refer the data in Data Manager later. See <a href="Chapter7.html">Chapter 7. Data Manager</a> for details.<p>
 
 <li>When error occurred (returned -1)</li>
 It displays errno and error message in pop-up.<br>
@@ -30,20 +29,18 @@ Need to investigate the cause of the error by yourself.<p>
 
 <h1>Address</h1>
 When using sendto(2) or sendmsg(2), specifies the destination address.<br>
-Regists the address in Address Manager beforehand. See <a>Chapter 5. Address Manager</a> for details.<p>
+Regists the address in Address Manager beforehand. See <a href="Chapter6.html">Chapter 6. Address Manager</a> for details.<p>
 
 When using recvfrom(2) or recvmsg(2), specifies whether gets remote address<p>
 <br>
 
 <h1>Message buffer</h1>
 Specifies data content and data size if sending data, buffer size if receiving data.<br>
-When using sendmsg(2) or recvmsg(2), specifies multiple data / buffers.<br>
-When using sendfile(2), specifies a file which to you want send.<p>
+When using sendmsg(2) or recvmsg(2), specifies multiple data / buffers.<p>
 
-The maximum size is limited to 64 KB in order to prevent an increase in packet charges due to erroneous operation.<br>
-If you want to send a large amount of data, please use the bulk data transfer function in consideration of communication charges.<p>
+The maximum size is limited to 64 KB in order to prevent an increase in packet charges due to erroneous operation.<p>
 
-Selects data content from the followings. When using a customized data, regists in Data Manager beforehand. See <a>Chapter 6. Data Manager</a> for details.<p>
+Selects data content from the followings. When using a customized data, regists in Data Manager beforehand. See <a href="Chapter7.html">Chapter 7. Data Manager</a> for details.<p>
 
 <table>
 <tr><th>Data content</th><th>Details</th></tr>
@@ -63,13 +60,27 @@ Selects data content from the followings. When using a customized data, regists 
 When using sendmsg(2), sends control messages as an ancillary data.<br>
 When using recvmsg(2), specifies the buffer size for an ancillary data.<p>
 
-Omits for details because these system calls is in preparation now.<p>
-<br>
+<table>
+<tr><th><font color=gray>Level</font><br>Type</th><th>Description</th><th>Send</th><th>Recv</th></tr>
+<tr><td><font color=gray>SOL_SOCKET</font><br><b>SCM_RIGHTS</b></td><td>Sends / receives the list of file descriptors (32 bit integer) via UNIX domain socket.</td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>SOL_SOCKET</font><br><b>SCM_TIMESTAMP</b></td><td>Receives timestamp (timeval structure).</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>SOL_SOCKET</font><br><b>SCM_CREDS</b></td><td>Sends / receives process credential information (cmsgcred structure data) via UNIX domain socket.</td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>SOL_SOCKET</font><br><b>SCM_TIMESTAMP_MONOTONIC</b></td><td>Receives monotonically increasing timestamp.</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVOPTS</b></td><td>Receives all IP options.</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVRETOPTS</b></td><td>Receives IP options for response.</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVDSTADDR</b></td><td>Receives destination IP address.</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RETOPTS</b></td><td>Gets / sets IP options (ip_opts structure data).</td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVIF</b></td><td>Receives interface information (sockaddr_dl structure data) which datagram is receibed.</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVTTL</b></td><td>Receives TTL (8 bit integer).</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_PKTINFO</b></td><td>Gets pktinfo (ip_pktinfo structure data) on recv socket / Sets source on sent datagram.</td><td align=center><img src="img/Check.png"></td><td align=center><img src="img/Check.png"></td></tr>
+<tr><td><font color=gray>IPPROTO_IP</font><br><b>IP_RECVTOS</b></td><td>Receives TOS (8 bit integer).</td><td align=center></td><td align=center><img src="img/Check.png"></td></tr>
+</table><p>
+<br><br>
 
 <h1>Message flags</h1>
 Specifies the I/O behavior with flags.<br>
 Specifies with the logical sum of 0 or more flags.<br>
-Please refer the man page or internet public site for the detail of each flags. See <a>Chapter 7. Menu</a> for detail of man page.<p>
+Please refer the man page or internet public site for the detail of each flags.<p>
 
 <table>
 <tr><th>Flag</th><th>Description</th><th>Send</th><th>Recv</th><th>Msg</th></tr>
@@ -87,9 +98,9 @@ Please refer the man page or internet public site for the detail of each flags. 
 </ul><p>
 
 <br>
-<center><hr>
+<hr><div class="copyright">
     Copyright © 2021 manabapp. All rights reserved.<br>
     English | <a href="Chapter4_ja.html">Japanese</a>
-</center>
+</div><br>
 </body>
 </html>

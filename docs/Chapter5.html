@@ -9,60 +9,59 @@
 <body>
 <center>Chapter 5. Interface Configuration<br><a href="help.html">SOCTEST - USER'S GUIDE</a></center><br>
 
-本章では、インターフェースの表示機能について説明します。<p>
+In this chapter, it describes about configuration view for interfaces.<p>
 
-Interface Configuration 画面では、端末のネットワークインターフェースのアドレス表示および状態確認を行います。<br>
-また、表示内容を最新の状態に更新します。<p>
+On the Interface Configuration view, displays addresses and status for device's interfaces.<br>
+And, refreshs configuration contents to the current status.<p>
 
-<h1>アドレスおよび状態の確認</h1>
-iOS 端末で IPv4 通信が可能なネットワークインターフェースの各種情報を表示します。<br>
-これにより、サーバーソケットに割り当てるアドレスやブロードキャスト通信で指定するアドレスを確認できます。<br>
+<h1>Displays address and status</h1>
+For doing IPv4 communication, the following network interfaces are avairable in iOS.<br>
+Then, you can confirm the address assigned to a server socket and the address for broadcast communication.<br>
 
 <ul>
-<li>IPv4 アドレス
-<li>インターフェース識別子
-<li>インターフェース名
-<li>ネットマスク
-<li>ブロードキャストアドレス
-<li>MAC アドレス（ダミーアドレス 02:00:00:00:00:00 が表示されます）
-<li>状態フラグ（フラグ名がカンマ区切りで表示されます）
-<li>FQDN（IPv4 アドレスから DNS 逆引きができた場合のみ表示されます）
+<li>IPv4 address
+<li>Interface index
+<li>Interface name
+<li>Netmask
+<li>Broadcast address
+<li>MAC address&nbsp;&nbsp;* Dummy address 02:00:00:00:00:00 is displayed
+<li>Status flags
+<li>FQDN&nbsp;&nbsp;* Dispalys only when IPv4 address can be reverse lookuped
 </ul>
 
-利用可能なネットワークインターフェースについて以下に説明します。<p>
+Avairable network interfaces are as below.。<p>
 
 <table>
-<tr><th>ネットワーク<br>インターフェース</th><th>説明</th></tr>
-<tr><td>Cellular</td><td>通信キャリアの移動体通信網（Mobile carrier network）に接続して IPv4 通信を行います。<br>
-端末の下記設定が有効になっている必要があります。<p>
+<tr><th>Network<br>Interface</th><th>Description</th></tr>
+<tr><td>Cellular</td><td>Connects the Mobile carrier network provided by MNO, starts IPv4 communication.<br>
+Needs to enable the following settings.<p>
 <ul>
-<li>[設定] &gt; [モバイル通信] &gt; [SocTest]、または
-<li>[設定] &gt; [SocTest] &gt; [モバイルデータ通信]
-</ul>
-</td></tr>
-<tr><td>Wi-fi</td><td>Wi-Fi ネットワークに接続して IPv4 通信を行います。</td></tr>
-<tr><td>Personal Hotspot</td><td>インターネット共有（以降、Personal Hotspot）機能とは、iOS 端末をモバイルルーターとして動作させ、他の端末を Cellular ネットワークに接続（中継）する機能です。<br>
-この機能を利用して、ローカルネットワーク（172.20.10.0/28）上で他端末間と IPv4 通信することが可能です。<br>
-インターフェースの IP アドレスは、172.20.10.1 固定です。<p>
+<li>[Settings] &gt; [Cellular] &gt; [SocTest], or
+<li>[Settings] &gt; [SocTest] &gt; [Cellular Data]
+</ul></td></tr>
+<tr><td>Wi-fi</td><td>Connects the Wi-Fi network, starts IPv4 communication.</td></tr>
+<tr><td>Personal<br>Hotspot</td><td>Personal Hotspot feature allows an iOS device to work as a mobile router and connect (relay) other devices to the Cellular network.<br>
+With using the feature, you can start IPv4 communication between this app and other device on local network (172.20.10.0/28).<br>
+The IP address of interface is fixed to 172.20.10.1.<p>
 
-端末の下記設定が有効になっている必要があります。<p>
+Needs to enable the following settings.<p>
 <ul>
-<li>[設定] &gt; [プライパシー] &gt; [ローカルネットワーク] &gt; [SocTest]、または
-<li>[設定] &gt; [SocTest] &gt; [ローカルネットワーク]
-</ul><p></td></tr>
-<tr><td>Loopback</td><td>127.0.0.1（ホスト名: localhost）を使用して IPv4 ループバック通信を行います。</td></tr>
+<li>[Settings] &gt; [Privacy] &gt; [Local Network] &gt; [SocTest], or
+<li>[Settings] &gt; [SocTest] &gt; [Local Network]
+</ul></td></tr>
+<tr><td>Loopback</td><td>With using 127.0.0.1 (hostname: localhost), starts IPv4 loopback communication.</td></tr>
 </table><p>
 <br>
 
-<h1>表示内容の更新</h1>
-<b>更新する</b> をタップすると端末の設定を再読み込みします。<br>
-現在地の移動によるモバイル通信基地局の切り替わりや Wi-Fi に接続した場合などに、新しいアドレスを確認できます。<p>
+<h1>Refreshs address and status</h1>
+With tapping <b>Reload</b>, reloads the device's configuration.<br>
+You can confirm the new address when the mobile communication base station is switched due to the movement of your current location or when you connect to Wi-Fi.<p>
 
 <br>
-<center><hr>
+<hr><div class="copyright">
     Copyright © 2021 manabapp. All rights reserved.<br>
     English | <a href="Chapter5_ja.html">Japanese</a>
-</center>
+</div><br>
 </body>
 </html>
 

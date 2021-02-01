@@ -87,6 +87,11 @@ fileprivate struct OptionRow: View {
             }
             value = try self.socket.getsockopt(level: level, option: self.option)
             
+            if self.level == IPPROTO_IP && self.option == IP_OPTIONS {
+                for i in 0 ..< self.object.isDataChecks.count {
+                    self.object.isDataChecks[i] = false  //reset
+                }
+            }
             if self.level == SOL_SOCKET && self.option == SO_ERROR && self.socket.isConnecting {
                 let connErrno = Int32(value.int)
                 if connErrno > 0 {
@@ -487,11 +492,15 @@ fileprivate struct IpMreqOptionView: View {
 
 fileprivate struct IpOptionsOptionView: View {
     @EnvironmentObject var object: SocTestSharedObject
+#if !DEBUG
+    @Environment(\.presentationMode) var presentationMode
+#endif
     @Binding var socket: SocSocket
     let level: Int32
     let option: Int32
     @Binding var value: SocOptval
     
+    @State private var isClearOptionsCheck: Bool = false
     @State private var isEditable: Bool = false
     @State private var isDecodable: Bool = true
     private var name: String { SocOptval.getOptionName(level: self.level, option: self.option) }
@@ -508,93 +517,109 @@ fileprivate struct IpOptionsOptionView: View {
         VStack(spacing: 0) {
             HStack(alignment: .bottom) {
                 Text(self.name)
-                    .font(.system(size: 16))
+                    .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(Color.init(UIColor.systemGray))
-                    .padding(12)
+                    .padding(.top, 8)
+                    .padding(.leading, 10)
+                    .padding(.bottom, 4)
                 Spacer()
             }
             SocTestScreen(text: self.$value.text, isEditable: self.$isEditable, isDecodable: self.$isDecodable)
-                .frame(minHeight: SocTestScreen.dumpScreenHeight, maxHeight: .infinity)
+                .frame(height: 100)
             Text(self.sizeString)
                 .font(.system(size: 14))
-                .padding(3)
-            
+                .padding(.top, 3)
+                .padding(.bottom, 16)
+
             Form {
-                NavigationLink(destination: IpOptionsSetting(socket: self.$socket, level: self.level, option: self.option, value: self.$value)) {
+                Section(header: Text("Header_DATA_FOR_IP_OPTIONS").font(.system(size: 16, weight: .semibold))) {
                     HStack {
-                        Spacer()
-                        VStack {
-                            Text("Next")
+                        Image(systemName: self.isClearOptionsCheck ? "checkmark.square.fill" : "square.slash")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 22, height: 22, alignment: .center)
+                            .foregroundColor(Color.init(self.isClearOptionsCheck ? UIColor.systemBlue : UIColor.systemGray))
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Clear options")
+                                .font(.system(size: 20))
+                                .padding(.trailing, -5)
                             if object.appSettingDescription {
-                                Text("Description_Next_IpOptionsSetting")
+                                Text("Description_Clear_options")
                                     .font(.system(size: 12))
                                     .foregroundColor(Color.init(UIColor.systemGray))
                             }
                         }
+                        .padding(.leading)
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        if !self.isClearOptionsCheck {
+                            for j in 0 ..< self.object.isDataChecks.count {
+                                self.object.isDataChecks[j] = false
+                            }
+                        }
+                        self.isClearOptionsCheck.toggle()
+                    }
+
+                    ForEach(0 ..< self.object.iodatas.count, id: \.self) { i in
+                        SocTestIODataRow(iodata: self.object.iodatas[i], selectable: true, isCheck: self.object.isDataChecks[i])
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                if !self.object.isDataChecks[i] {
+                                    self.isClearOptionsCheck = false
+                                    for j in 0 ..< self.object.isDataChecks.count {
+                                        self.object.isDataChecks[j] = false
+                                    }
+                                }
+                                self.object.isDataChecks[i].toggle()
+                            }
+                            .disabled(self.object.iodatas[i].sendok ? false : true)
+                    }
+                }
+            }
+            .listStyle(PlainListStyle())
+            
+            Form {
+                Button(action: {
+                    SocLogger.debug("IpOptionsOptionView: Button: Done")
+                    self.executeSetsockopt()
+                }) {
+                    HStack {
+                        Spacer()
+                        Image(systemName: "return")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 19, height: 19, alignment: .center)
+                        Text("Button_Done")
+                            .padding(.leading, 10)
+                            .padding(.trailing, 20)
                         Spacer()
                     }
                 }
             }
             .frame(height: 110)
         }
-        .navigationBarTitle(Text("getsockopt"), displayMode: .inline)
-    }
-}
-
-fileprivate struct IpOptionsSetting: View {
-    @EnvironmentObject var object: SocTestSharedObject
-#if !DEBUG
-    @Environment(\.presentationMode) var presentationMode
-#endif
-    @Binding var socket: SocSocket
-    let level: Int32
-    let option: Int32
-    @Binding var value: SocOptval
-    
-    private var name: String { SocOptval.getOptionName(level: self.level, option: self.option) }
-    
-    var body: some View {
-        List {
-            Section(header: Text(name)) {
-                ZStack {
-                    Button(action: {
-                        SocLogger.debug("IpOptionsSetting: Button: no data")
-                        self.value.data = nil
-                        self.executeSetsockopt()
-                    }) {
-                        HStack {
-                            SocTestCommonRow.clearOptions
-                            Image(systemName: "return")
-                                .font(.system(size: 12))
-                                .foregroundColor(Color.init(UIColor.systemBlue))
-                        }
-                    }
-                }
-                ForEach(0 ..< self.object.iodatas.count, id: \.self) { i in
-                    ZStack {
-                        Button(action: {
-                            SocLogger.debug("IpOptionsSetting: Button: \(i)")
-                            self.value.data = self.object.iodatas[i].data
-                            self.executeSetsockopt()
-                        }) {
-                            HStack {
-                                SocTestIODataRow(iodata: self.object.iodatas[i])
-                                Image(systemName: "return")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(Color.init(self.object.iodatas[i].sendok ? UIColor.systemBlue : UIColor.systemGray))
-                            }
-                        }
-                        .disabled(self.object.iodatas[i].sendok ? false : true)
-                    }
-                }
-            }
-        }
-        .listStyle(PlainListStyle())
-        .navigationBarTitle(Text("setsockopt"), displayMode: .inline)
+        .navigationBarTitle(Text(SocTestCommonRow.functions[FUNC_SETSOCKOPT].name), displayMode: .inline)
     }
     
     private func executeSetsockopt() {
         do {
+            var isAnyChecked: Bool = false
+            if self.isClearOptionsCheck {
+                isAnyChecked = true
+                self.value.data = nil
+            }
+            else {
+                for i in 0 ..< self.object.isDataChecks.count {
+                    if self.object.isDataChecks[i] {
+                        isAnyChecked = true
+                        self.value.data = self.object.iodatas[i].data
+                    }
+                }
+            }
+            guard isAnyChecked else {
+                throw SocTestError.NoData
+            }
             defer {
                 if self.object.appSettingAutoMonitoring {
                     SocTestSocketSimulator.postConnInfo(socket: &self.socket)
@@ -612,6 +637,11 @@ fileprivate struct IpOptionsSetting: View {
         catch let error as SocError {
             self.object.alertMessage = error.message
             self.object.alertDetail = error.detail
+            self.object.isPopAlert = true
+        }
+        catch let error as SocTestError {
+            self.object.alertMessage = error.message
+            self.object.alertDetail = ""
             self.object.isPopAlert = true
         }
         catch {

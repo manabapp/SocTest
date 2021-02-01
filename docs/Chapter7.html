@@ -14,38 +14,39 @@ In this chapter, it describes about the data management and how to edit.<p>
 In Data Manager view, creates, refers, edits, and deletes a data (for sending, received).<p>
 
 <h1>Creation a data</h1>
-With tapping <b><img src="img/Add.png" height=36px>New Data</b>, moves to the next input view. Then, inputs data name and creats a empty data.<br>
+With tapping <b>New Data</b>, moves to the next input view. Then, inputs data name and creats a empty data.<br>
 The created detas are listed in Data Manager view.<p>
 
-In sending with sendXXX, uses this data as a customized data.<br>
-The maximum number of data for sending that can be registered is 16.<p>
+In sending with sendXXX(2), uses this data as a customized data.<br>
+The maximum number of data for sending that can be registered is 32 (includes the number of received data saved).<p>
 <br>
 
 <h1>Refarense a data</h1>
 With tapping a data row of list, moves to the binary editor view.<br>
 Data for sending is editable, and received data is read only.<br>
-This view is consists of Ascii text area, Hexadecimal dump area, and operation menu.<br>
+This view is consists of ASCII text area, Hexadecimal (HEX) dump area, and operation menu.<br>
 If a data does not fit on the screen size of each view, you can displays the data on full view.<p>
 
-The encoding of multibyte code in Ascii text is UTF-8.<br>
-If contains bytes other than UTF-8, displays <b>Non-unicode character data</b> in Ascii text area.<p>
+The encoding of multibyte code in ASCII text is UTF-8.<br>
+If contains bytes other than UTF-8, displays <b>Non-unicode character data</b> in ASCII text area.<p>
 <br>
 
 <h1>Editing a data</h1>
-Edits the data in the binary editor view.<p>
-
-<img src="img/DataManager.001.jpeg" width=100%><p>
+Operates in the following flow on the binary editor view.<p>
 
 <ol>
 <li>Editing the data</li>
-With tapping the editable Ascii or Hex area, software keyboard appears. Then, you can edit.<br>
+With tapping the editable ASCII or HEX area, software keyboard appears. Then, you can edit.<br>
 The maximum size of data for transmission is limited to 64KB.<p>
 
 <li>Converting the editing data</li>
-When conversion from Ascii to Hexadecimal, you can switch the line feed code to LF or CRLF to convert “¥n” code to 0x0a or 0x0d0a.<br>
-Completes editing when converting done successfully.<p>
+With tapping <b>Convert</b>, synchronizes data between ASCII and HEX.<br>
+When conversion from ASCII to HEX, you can switch the line feed code to LF or CRLF to convert “¥n” code to 0x0a or 0x0d0a.<p>
+
 
 <li>Saving the data</li>
+When editing is complete, you can tap <b>Save</b>.
+With tapping <b>Save</b>, saves the data.<p>
 </ol><p>
 <br>
 
@@ -53,9 +54,9 @@ Completes editing when converting done successfully.<p>
 With swiping left a row, deletes the data.<p>
 
 <br>
-<center><hr>
+<hr><div class="copyright">
     Copyright © 2021 manabapp. All rights reserved.<br>
     English | <a href="Chapter7_ja.html">Japanese</a>
-</center>
+</div><br>
 </body>
 </html>

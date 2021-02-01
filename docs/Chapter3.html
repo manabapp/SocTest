@@ -11,14 +11,15 @@
 
 In this chapter, it describes about the options for socket.<p>
 
-SOL_SOCKET, IPPROTO_TCP, and IPPROTO_IP options can be used.<br>
-Please refer the man page or internet public site for the details of each option. See <a>Chapter 7. Menu</a> for details of man page.<p>
+SOL_SOCKET, IPPROTO_TCP, IPPROTO_UDP, and IPPROTO_IP options can be used.<br>
+Please refer the man page or internet public site for the details of each option.<p>
 <br>
 
 <h1>SOL_SOCKET options</h1>
 <table>
 <tr><th>Option name</th><th width=100%>Description</th></tr>
 <tr><td>SO_DEBUG</td><td>Enables recording of debugging information.</td></tr>
+<tr><td>SO_ACCEPTCONN</td><td>Whether the socket is listening.</td></tr>
 <tr><td>SO_REUSEADDR</td><td>Enables local address reuse.</td></tr>
 <tr><td>SO_KEEPALIVE</td><td>Enables keep connections alive.</td></tr>
 <tr><td>SO_DONTROUTE</td><td>Enables routing bypass for outgoing messages.</td></tr>
@@ -37,6 +38,9 @@ Please refer the man page or internet public site for the details of each option
 <tr><td>SO_RCVTIMEO</td><td>Timeout value for input (seconds).</td></tr>
 <tr><td>SO_ERROR</td><td>Gets and clears error on the socket (get only).</td></tr>
 <tr><td>SO_TYPE</td><td>Socket type (get only).<ul><li>SOCK_STREAM(1): Connection-based byte streams socket<li>SOCK_DGRAM(2): Connectionless datagrams socket</ul></td></tr>
+<tr><td>SO_NUMRCVPKT</td><td>Number of datagrams in receive socket buffer (get only).</td></tr>
+<tr><td>SO_NET_SERVICE_TYPE</td><td>Network service type.<ul><li>NET_SERVICE_TYPE_BE(0): Best effort<li>NET_SERVICE_TYPE_BK(1): Background system initiated<li>NET_SERVICE_TYPE_SIG(2): Signaling<li>NET_SERVICE_TYPE_VI(3): Interactive Video<li>NET_SERVICE_TYPE_VO(4): Interactive Voice<li>NET_SERVICE_TYPE_RV(5): Responsive Multimedia Audio/Video<li>NET_SERVICE_TYPE_AV(6): Multimedia Audio/Video Streaming<li>NET_SERVICE_TYPE_OAM(7): Operations, Administration, and Management<li>NET_SERVICE_TYPE_RD(8): Responsive Data</ul></td></tr>
+<tr><td>SO_NETSVC_MARKING_LEVEL</td><td>Get QoS marking in effect for socket (get only).<ul><li>0: The outgoing network interface is not known<li>1: Default marking at layer 2 (for example Wi-Fi WMM)<li>2: Layer 3 DSCP marking and layer 2 marking for all Network Service Types<li>3: The system policy limits layer 3 DSCP marking and layer 2 marking to background Network Service Types</ul></td></tr>
 </table><p>
 <br>
 
@@ -61,15 +65,24 @@ Please refer the man page or internet public site for the details of each option
 </table><p>
 <br>
 
+<h1>IPPROTO_UDP options</h1>
+<table>
+<tr><th>Option name</th><th width=100%>Description</th></tr>
+<tr><td>UDP_NOCKSUM</td><td>Don't checksum outbound payloads.</td></tr>
+</table><p>
+<br>
+
 <h1>IPPROTO_IP options</h1>
 <table>
 <tr><th>Option name</th><th width=100%>Description</th></tr>
 <tr><td>IP_OPTIONS</td><td>Gets IP options on incoming IP packets.<br>If some option are exist, displays the contents in hex dump.<br><br>Sets / clears IP options on each outgoin IP packet.<br>Content of a option needs to be registed in Data Manager beforehand.</td></tr>
+<tr><td>IP_HDRINCL</td><td>Suppresses the kernel makes IP header.</td></tr>
 <tr><td>IP_TOS</td><td>Sets the type-of-service field in IP header.</td></tr>
 <tr><td>IP_TTL</td><td>Sets the time-to-live (hops) field in IP header.</td></tr>
 <tr><td>IP_RECVOPTS</td><td>Enables reciept of all IP options as a control message.</td></tr>
 <tr><td>IP_RECVRETOPTS</td><td>Enables reciept of IP options as a control message for response.</td></tr>
 <tr><td>IP_RECVDSTADDR</td><td>Enables reciept of destination IP address as a control message.</td></tr>
+<tr><td>IP_RETOPTS</td><td>Enables sending / reciept of IP options (in_opts) as a control message.</td></tr>
 <tr><td>IP_MULTICAST_IF</td><td>Sets the IP address of interface which multicast datagram is sent.</td></tr>
 <tr><td>IP_MULTICAST_TTL</td><td>Changes the TTL for outgoing multicast datagrams (range: 0 through 255).</td></tr>
 <tr><td>IP_MULTICAST_LOOP</td><td>Enables looped back by the IP layer for local delivery.</td></tr>
@@ -77,15 +90,18 @@ Please refer the man page or internet public site for the details of each option
 <tr><td>IP_DROP_MEMBERSHIP</td><td>Drops a multicast group membership (set only).</td></tr>
 <tr><td>IP_PORTRANGE</td><td>Sets the range of local port numbers.<ul><li>IP_PORTRANGE_DEFAULT(0): default range, normally 1024 through 5000<li>IP_PORTRANGE_HIGH(1): high range, normally 49152 through 65535<li>IP_PORTRANGE_LOW(2): low range, normally from 1024 down to 1 in descending order (May be restricted to privileged processes on iOS kernel)</ul></td></tr>
 <tr><td>IP_RECVIF</td><td>Enables reciept of interface which datagram is receibed.</td></tr>
+<tr><td>IP_STRIPHDR</td><td>Drops receive of raw IP header.</td></tr>
 <tr><td>IP_RECVTTL</td><td>Enables reciept of TTL as a control message.</td></tr>
+<tr><td>IP_BOUND_IF</td><td>Gets / sets bound interface.</td></tr>
 <tr><td>IP_PKTINFO<br>(IP_RECVPKTINFO)</td><td>Enables sending / reciept of pktinfo as a control message.</td></tr>
 <tr><td>IP_RECVTOS</td><td>Enables reciept of TOS as a control message.</td></tr>
+<tr><td>IP_DONTFRAG</td><td>Don't fragment packet.</td></tr>
 </table><p>
 
 <br>
-<center><hr>
+<hr><div class="copyright">
     Copyright © 2021 manabapp. All rights reserved.<br>
     English | <a href="Chapter3_ja.html">Japanese</a>
-</center>
+</div><br>
 </body>
 </html>

@@ -42,7 +42,7 @@ It changes depending on the status of socket.<p>
 <tr><td align=center><img src="img/ClientSocket.png"></td><td><b>Client socket</b><br>Other than those above.</td></tr>
 <tr><td rowspan=2 align=center>I/O mode<br>(<b>*1</b>)</td><td align=center><img src="img/NonBlocking.png"></td><td><b>Non-blocking mode</b><br>The file status flag of socket was set to O_NONBLOCK with fcntl(2).</td></tr>
 <tr><td align=center><img src="img/Blocking.png"></td><td><b>Blocking mode</b><br>Other than those above.</td></tr>
-<tr><td rowspan=8 align=center>Connection<br>status (<b>*2</b>)</td><td align=center><img src="img/Idle.png"></td><td><b>Not connected</b><br>Status is Idle. Or, the socket is bound with calling bind(2).</td></tr>
+<tr><td rowspan=8 align=center>Connection<br>status (<b>*2</b>)</td><td align=center><img src="img/Idle.png"></td><td><b>Not connected</b><br>Status is Idle. Or, the socket is bound status with calling bind(2).</td></tr>
 <tr><td align=center><img src="img/Listening.png"></td><td><b>Listening</b><br>Waiting for connection request with calling listen(2).</td></tr>
 <tr><td align=center><img src="img/ConnectInProgress.png"></td><td><b>Connect in progress</b><br>Waiting for completion of connection for the non-blocking socket.</td></tr>
 <tr><td align=center><img src="img/ConnectError.png"></td><td><b>Connect error</b><br>Error occurred in connection for the socket.</td></tr>
@@ -52,7 +52,7 @@ It changes depending on the status of socket.<p>
 <tr><td align=center><img src="img/ShutdownRdWr.png"></td><td><b>Disconnect</b><br>All of full duplex were shut down.</td></tr>
 </table><p>
 &nbsp;<b>*1</b> When the app setting <b>SHOW DESCRIPTION</b> is enabled, the icon of I/O mode is displayed.<br>
-&nbsp;<b>*2</b> When the app setting <b>CONNECTION MONITORING</b> is enabled, the icon of connection status is displayed with SOCK_STREAM socket. But, this row disappers when becomes a listening socket.<p>
+&nbsp;<b>*2</b> When the app setting <b>AUTO MONITORING</b> is enabled, the icon of connection status is displayed with SOCK_STREAM socket.<p>
 <br>
 
 <h2>Socket address (Upper row)</h2>
@@ -88,22 +88,20 @@ When the app setting <b>SHOW DESCRIPTION</b> is enabled, this row is displayed.<
 
 <h2>Socket connection status (Lower row 2)</h2>
 Connection status of the socket are displayed. This status interlocks the above icon.<br>
-When the app setting <b>CONNECTION MONITORING</b> is enabled, this row is displayed with SOCK_STREAM socket.<br>
-But, this row disappers when becomes a listening socket.<p>
+When the app setting <b>AUTO MONITORING</b> is enabled, this row is displayed with SOCK_STREAM socket.<p>
 
 <table>
 <tr><th>Connection status</th><th>Icon</th><th>Description</th></tr>
-<tr><td><b>Idle</b></td><td rowspan=2 align=center><img src="img/Idle.png"></td><td>connect(2), bind(2) and listen(2) have not been called for the socket yet.</td></tr>
-<tr><td><b>Bound</b></td><td>bind(2) have been called for the socket.</td></tr>
+<tr><td><b>Idle</b></td><td rowspan=2 align=center><img src="img/Idle.png"></td><td>Initial status.</td></tr>
+<tr><td><b>Bound</b></td><td>An address is bound to the socket.</td></tr>
+<tr><td><b>Listening</b></td><td align=center><img src="img/Listening.png"></td><td>Waiting for connection requests.</td></tr>
 <tr><td><b>Connect in progress</b></td><td align=center><img src="img/ConnectInProgress.png"></td><td>Waiting for completion of connecting.</td></tr>
-<tr><td><b>Connect error</b></td><td align=center><img src="img/ConnectError.png"></td><td>Error occurred in connecting process.<br>The following error value is displayed as an additional information.<br><br>&nbsp;&nbsp;<b>Err#</b>&lt;<i>errno number</i>&gt; &lt;<i>errno name</i>&gt;</td></tr>
-<tr><td rowspan=3><b>Connected</b></td><td align=center><img src="img/Connected.png"></td><td rowspan=3>Socket is connected.<br>In a blocking socket, the following time required for connection process (microsecond accuracy) is displayed as an additional information.<br><br>&nbsp;&nbsp;<b>Response:</b> &lt;<i>Response Time</i> (<b>*3</b>)&gt;</td></tr>
+<tr><td><b>Connect error</b></td><td align=center><img src="img/ConnectError.png"></td><td>Error occurred in connecting process.<br>The following error value is displayed as an additional information.<br><br>&nbsp;&nbsp;Err#&lt;<i>errno number</i>&gt; &lt;<i><font color=red><b>errno name</b></font></i>&gt;</td></tr>
+<tr><td rowspan=3><b>Connected</b></td><td align=center><img src="img/Connected.png"></td><td rowspan=3>Socket is connected.</td></tr>
 <tr><td align=center><img src="img/ShutdownRd.png"></td></tr>
 <tr><td align=center><img src="img/ShutdownWr.png"></td></tr>
 <tr><td><b>Disconnect</b></td><td align=center><img src="img/ShutdownRdWr.png"></td><td>Socket is disconnected.</td></tr>
 </table><p>
-&nbsp;<b>*3</b> For TCP sockets, this response time can be considered the Initial RTT.<br>
-Initial RTT is round-trip time until SYN/ACK responds in TCP 3 way-handshake. Therefore, if no TCP retransmission occurs in SYN or SYN/ACK, this time approximates the response time of connect(2).<p>
 
 Connection status transition diagram is as below.<br>
 <img src="img/ConnectionStatus.001.jpeg" width=100%><p>
@@ -111,7 +109,7 @@ Connection status transition diagram is as below.<br>
 
 <h2>TCP state (Lower row 3)</h2>
 The state of TCP connection associated with a socket is displayed.<br>
-When the app setting <b>CONNECTION MONITORING</b> is enabled, this row is displayed with TCP socket (AF_INET socket of SOCK_STREAM type).<p>
+When the app setting <b>AUTO MONITORING</b> is enabled, this row is displayed with TCP socket (AF_INET socket of SOCK_STREAM type).<p>
 
 This state is displayed based on the values of parameter tcpi_state obtained TCP_CONNECTION_INFO option.<br>
 See RFC#793 or internet public site for details.<p>
@@ -134,8 +132,7 @@ See RFC#793 or internet public site for details.<p>
 
 <h2>TCP traffic (Lower rows 4 - 6)</h2>
 The amount of incoming data and outgoing data in packet transfer via a socket are displayed.<br>
-When the app setting <b>CONNECTION MONITORING</b> is enabled, it is displayed with TCP socket other than CLOSED status.<br>
-But, these rows disapper when becomes a listening socket. <p>
+When the app setting <b>AUTO MONITORING</b> is enabled, it is displayed with TCP socket other than CLOSED, LISTEN status.<p>
 
 The value of the following parameters obtained TCP_CONNECTION_INFO option is displayed.<p>
 
@@ -148,11 +145,15 @@ The value of the following parameters obtained TCP_CONNECTION_INFO option is dis
 <br>
 
 <h2>TCP RTT (Lower row 7)</h2>
-The average and most recent RTT (milisecond accuracy) in TCP communication are displayed.<br>
-When the app setting <b>CONNECTION MONITORING</b> is enabled, it is displayed with TCP socket other than CLOSED status.<br>
-But, this row disappers when becomes a listening socket.<p>
+The RTT (milisecond accuracy) in TCP communication are displayed.<br>
+When the app setting <b>AUTO MONITORING</b> is enabled, it is displayed with TCP socket other than CLOSED, LISTEN status.<p>
 
-The value of parameters tcpi_srtt (average RTT) and tcpi_rttcur (most recent RTT) obtained TCP_CONNECTION_INFO option is displayed.<p>
+The value of the following parameters obtained TCP_CONNECTION_INFO option is displayed.<p>
+<table>
+<tr><th>Round Trip</th><th>Parameter</th><th>Description</th></tr>
+<tr><td><b>Average RTT</b></td><td>tcpi_srtt</td><td>Average time of RTT (seconds)</td></tr>
+<tr><td><b>Recent RTT</b></td><td>tcpi_rttcur</td><td>Most recent time of RTT (seconds)</td></tr>
+</table><p>
 <br>
 
 <h2>Events bitmask (Lower row 8)</h2>
@@ -160,18 +161,18 @@ The bit mask of response events by polling are displayed.<br>
 If there are some events, the corresponding event bit is highlighted.<br>
 This information is utilized due to confirm the presence of incoming data or error and judge completion of asynchronous processing.<p>
 
-[Supplement]<br>
+[Note]<br>
 Three types of polling are available in this app.
 <ul>
 <li>polling for all sockets (See above)
-<li>polling with specifying request events and timeout value (See <a>Chapter 2. Socket Funtions</a>)
-<li>polling executed automatically when the app setting <b>Polling</b> is enabled (See <a>Chapter 7. Menu</a>)
+<li>polling with specifying request events and timeout value (See <a href="Chapter2.html">Chapter 2. Socket Simulator - Functions</a>)
+<li>polling executed automatically when the app setting <b>AUTO MONITORING</b> is enabled (See <a href="Chapter8.html">Chapter 8. Menu</a>)
 </ul><p>
 
 <br>
-<center><hr>
+<hr><div class="copyright">
     Copyright © 2021 manabapp. All rights reserved.<br>
     English | <a href="Chapter1_ja.html">Japanese</a>
-</center>
+</div><br>
 </body>
 </html>

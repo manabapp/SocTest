@@ -282,7 +282,7 @@ fileprivate struct AboutApp: View {
                 .padding(.bottom, 5)
             }
             
-            Text("Support OS: iOS 14.0 or newer")
+            Text("Support OS: iOS 14.1 or newer")
                 .font(.system(size: 11))
             Text("Localization: en, ja")
                 .font(.system(size: 11))

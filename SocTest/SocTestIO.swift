@@ -324,6 +324,9 @@ fileprivate struct ControlMessages: View {
                                 isActiveRetopts = false
                             }
                             else {
+                                for i in 0 ..< self.object.isDataChecks.count {
+                                    self.object.isDataChecks[i] = false  //reset
+                                }
                                 isActiveRetopts = true
                             }
                         }) {
@@ -508,15 +511,15 @@ fileprivate struct ControlMessageRetopts: View {
                         Text("Label_IP_options")
                             .foregroundColor(Color.init(UIColor.systemGray))
                         ForEach(0 ..< self.object.iodatas.count, id: \.self) { i in
-                            SocTestIODataRow(iodata: self.object.iodatas[i], selectable: true, isCheck: self.object.isCmsgRetoptsChecks[i])
+                            SocTestIODataRow(iodata: self.object.iodatas[i], selectable: true, isCheck: self.object.isDataChecks[i])
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-                                    if !self.object.isCmsgRetoptsChecks[i] {
-                                        for j in 0 ..< self.object.isCmsgRetoptsChecks.count {
-                                            self.object.isCmsgRetoptsChecks[j] = false
+                                    if !self.object.isDataChecks[i] {
+                                        for j in 0 ..< self.object.isDataChecks.count {
+                                            self.object.isDataChecks[j] = false
                                         }
                                     }
-                                    self.object.isCmsgRetoptsChecks[i].toggle()
+                                    self.object.isDataChecks[i].toggle()
                                 }
                                 .disabled(self.object.iodatas[i].sendok ? false : true)
                         }
@@ -561,8 +564,8 @@ fileprivate struct ControlMessageRetopts: View {
                 throw SocTestError.InvalidIpAddr
             }
             var anyChecked: Bool = false
-            for i in 0 ..< self.object.isCmsgRetoptsChecks.count {
-                if self.object.isCmsgRetoptsChecks[i] {
+            for i in 0 ..< self.object.isDataChecks.count {
+                if self.object.isDataChecks[i] {
                     let len = self.object.iodatas[i].size > 40 ? 40 : self.object.iodatas[i].size
                     self.object.iodatas[i].data.withUnsafeBytes { (pointer: UnsafeRawBufferPointer) in
                         let unsafeBufferPointer = pointer.bindMemory(to: UInt8.self)

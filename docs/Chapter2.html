@@ -16,40 +16,33 @@ Executes the selected system call in the list.<p>
 
 <ul>
 <li>When succeeded (returned 0 or upper)</li>
-It automatically goes back to the Top View except for some.<br>
+It automatically goes back to the previous view except for some.<br>
 The value got or the status changed by system call is reflected in Top View.<p>
 
 <li>When error occurred (returned -1)</li>
 It displays errno and error message in pop-up.<br>
 Need to investigate the cause of the error by yourself.<br>
-See <a>Chapter 7. Menu</a> for iOS's errno.<p>
+See <a href="Chapter8.html">Chapter 8. Menu</a> for iOS's errno.<p>
 
 </ul>
 <br>
 
-<h1>fcntl(F_GETFL / F_SETFL)</h1>
-Confirms the current I/O mode of a socket with F_GETFL command. And, changes the I/O mode with F_SETFL command.<br>
-If O_NONBLOCK is set to file status flags, it indicats that the socket is in non-blocking mode.<br>
-Current I/O mode is reflected in Top View. See <a>Chapter 1. Top View</a> for details.<p>
-<br>
-
 <h1>getsockopt / setsockopt</h1>
-Gets / sets a socket option. See <a>Chapter 3. Socket options</a>.<p>
+Gets / sets a socket option. See <a href="Chapter3.html">Chapter 3. Socket Simulator - Options</a>.<p>
 <br>
 
 <h1>bind</h1>
 Binds a address to the socket.<br>
-Selects an assigning address in address list of the next view. Regists the address in Address Manager beforehand. See <a>Chapter 5. Address Manager</a> for details.<p>
+Selects an assigning address in address list of the next view. Regists the address in Address Manager beforehand. See <a href="Chapter6.html">Chapter 6. Address Manager</a> for details.<p>
 <br>
 
 <h1>connect</h1>
 Connects the socket to specifying address.<br>
-Selects a connecting address in address list of the next view. Regists the address in Address Manager beforehand. See <a>Chapter 5. Address Manager</a> for details.<p>
+Selects a connecting address in address list of the next view. Regists the address in Address Manager beforehand. See <a href="Chapter6.html">Chapter 6. Address Manager</a> for details.<p>
 
+If the socket is SOCK_STREAM type and non-blocking mode, connect(2) returns with EINPROGRESS. In this case, this app can monitor the completion connect. See <a href="Chapter8.html">Chapter 8. Menu</a> for details.<p>
 
-If the socket is SOCK_STREAM type and non-blocking mode, connect(2) returns with EINPROGRESS. In this case, this app can monitor the completion connect. See <a>Chapter 7. Menu</a> for details.<p>
-
-[Supplement]<br>
+[Note]<br>
 This app does not provide the function to interrupt connect(2) by signal.<br>
 Therefore, when connect processing is not completed immediately (mainly not reachable to remote host), needs to wait for timeout.<p>
 <br>
@@ -58,12 +51,12 @@ Therefore, when connect processing is not completed immediately (mainly not reac
 Enables a server as a listening socket, and waits for connections.<br>
 Arriving connection requests are queued. Specifies the length, backlog, of this queue in the next view.<p>
 
-[Note]<br>
+[Caution]<br>
 Note that kernel would accept an access from an unspecified number of hosts when using a socket which to bound the ANY address (0.0.0.0).<br>
 In this case, the kernel will be able to accept backlog's connections and receive the RCVBUF size of data even if you don't call accept(2) or recv(2).<br>
 If you conside security, needs to ensure security by yourself, such as connecting to a reliable Wi-Fi network.<p>
 
-[Supplement]<br>
+[Note]<br>
 In iOS, SO_ACCEPTFILTER option can not be used. And, the kernel's firewall feature (packet filter or ipfw) can't be used on non jailbroken iOS device.<br>
 Therefore, it isn't realizable the control (blocking access from a specific host) equivalent to a firewall.<p>
 <br>
@@ -72,14 +65,10 @@ Therefore, it isn't realizable the control (blocking access from a specific host
 Creates new connected socket with taking a connection request out from queue.<br>
 In the next view, specifies whether gets remote address.<p>
 
-[Supplement 1]<br>
+[Note]<br>
 This app does not provide the function to interrupt accept(2) by signal.<br>
 Therefore, when the queue is empty (no connection request arrived), you become not be able to operate until arriving connection request newly.<br>
 In this case, please restart the app.<p>
-
-[Supplement 2]<br>
-Even if system call succeeds, it may not go back to the Top View (known bug).<br>
-In this case, please go back manually.<p>
 <br>
 
 <h1>send</h1>
@@ -91,42 +80,48 @@ In this case, please go back manually.<p>
 <h1>recvfrom</h1>
 <h1>recvmsg</h1>
 <h1>recv for Bulk Data Transfer</h1>
-Sends and receives data via socket. See <a>Chapter 4. Socket I/O</a>.<p>
+Sends and receives data via socket. See <a href="Chapter4.html">Chapter 4. Socket Simulator - I/O</a>.<p>
 <br>
 
 <h1>getsockname</h1>
 Gets the current address associated with the socket.<br>
-This address is reflected in Top View. See <a>Chapter 1. Top View</a> for details.<p>
+This address is reflected in Top View. See <a href="Chapter1.html">Chapter 1. Socket Simulator</a> for details.<p>
 
-This app can automatically find out address and reflect to Top View when connecting. See <a>Chapter 7. Menu</a> for details.<p>
+This app can automatically find out address and reflect to Top View when connecting. See <a href="Chapter8.html">Chapter 8. Menu</a> for details.<p>
 <br>
 
 <h1>getpeername</h1>
 Gets the remote address connecting a socket.<br>
-This address is reflected in Top View. See <a>Chapter 1. Top View</a> for details.<p>
+This address is reflected in Top View. See <a href="Chapter1.html">Chapter 1. Socket Simulator</a> for details.<p>
 <br>
 
 <h1>shutdown</h1>
 Shuts down one or both halves of the connection.<br>
 In the next view, selects how to shut down the connection.<br>
-Status of full duplex connection is reflected in Top View. See <a>Chapter 1. Top View</a> for details.<p>
+Status of full duplex connection is reflected in Top View. See <a href="Chapter1.html">Chapter 1. Socket Simulator</a> for details.<p>
+<br>
+
+<h1>fcntl(F_GETFL / F_SETFL)</h1>
+Confirms the current I/O mode of a socket with F_GETFL command. And, changes the I/O mode with F_SETFL command.<br>
+If O_NONBLOCK is set to file status flags, it indicats that the socket is in non-blocking mode.<br>
+Current I/O mode is reflected in Top View. See <a href="Chapter1.html">Chapter 1. Socket Simulator</a> for details.<p>
 <br>
 
 <h1>poll</h1>
-Waits (polling)for the socket to be ready to send or receive.<br>
-In this polling, selects requests events (0 or more events from POLLIN, POLLPRI, and POLLOUT) in the next view, and selects timeout value (mili seconds) in futher next view. Please refer the man page or internet public site for the function of each event. See <a>Chapter 7. Menu</a> for details.<p>
+Waits (polling) for the socket to be ready to send or receive.<br>
+In this polling, selects timeout value (mili seconds) in the next view, and selects requests events (0 or more events from POLLIN, POLLPRI, and POLLOUT) in futher next view. Please refer the man page or internet public site for the function of each event.<p>
 
 When poll(2) returns, returned events are displayed as polling result.<p>
 
-[Supplement]<br>
+[Note]<br>
 This app does not provide the function to interrupt poll(2) by signal.<br>
 Therefore, if you select <b>No timeout</b> (blocks indefinitely until any event), becomes not be able to operate this app when no events.<br>
 In this case, please restart the app.<p>
 
 <br>
-<center><hr>
+<hr><div class="copyright">
     Copyright © 2021 manabapp. All rights reserved.<br>
     English | <a href="Chapter2_ja.html">Japanese</a>
-</center>
+</div><br>
 </body>
 </html>
