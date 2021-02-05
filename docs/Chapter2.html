@@ -53,8 +53,7 @@ Arriving connection requests are queued. Specifies the length, backlog, of this 
 
 [Caution]<br>
 Note that kernel would accept an access from an unspecified number of hosts when using a socket which to bound the ANY address (0.0.0.0).<br>
-In this case, the kernel will be able to accept backlog's connections and receive the RCVBUF size of data even if you don't call accept(2) or recv(2).<br>
-If you conside security, needs to ensure security by yourself, such as connecting to a reliable Wi-Fi network.<p>
+In this case, the kernel will be able to accept backlog's connections and receive the RCVBUF size of data even if you don't call accept(2) or recv(2).<p>
 
 [Note]<br>
 In iOS, SO_ACCEPTFILTER option can not be used. And, the kernel's firewall feature (packet filter or ipfw) can't be used on non jailbroken iOS device.<br>

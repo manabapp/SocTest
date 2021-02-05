@@ -81,12 +81,12 @@ It discribes each colmun.<p>
 
 <table>
 <tr><th>Colmun</th><th>Description</th></tr>
-<tr><td><b>MMM dd</b><br>Call Date</td><td>Date which calls the system call.<br>Month: Jan, Feb, ...</td></tr>
+<tr><td><b>MMM dd</b><br>Call Date</td><td>Date which called the system call.<br>Month: Jan, Feb, ...</td></tr>
 <tr><td><b>HH:mm:ss.SSS</b><br>Call Time</td><td>Time that the system call returned (milisecond accuracy).<br>This is a local time depending on device's timezone setting.</td></tr>
 <tr><td><b>response</b><br>Response Time</td><td>Indicates the time required for system call's process (microsecond accuracy).</td></tr>
 <tr><td><b>function</b><br>System call Name</td><td>Indicates the name of system calls.<br>There are the system calls which selectable in the list (see <a href="Chapter2.html">Chapter 2. Socket Simulator - Functions</a>), socket(2) used to create a socket, and close(2) used to delete a socket.</td></tr>
 <tr><td><b>arg1, arg2, ...</b><br>Argument Parameters</td><td>Indicates the values specified to system call.<br>It described later in details.</td></tr>
-<tr><td><b>retval</b><br>Reterun value</td><td>Indicates the reterun value of system call.<br>When error occurred (returned -1), displays the following information.<br><br>&nbsp;&nbsp;<b>Err#</b>&lt;<i>errno number</i>&gt; &lt;<i>errno name</i>&gt;</td></tr>
+<tr><td><b>retval</b><br>Return value</td><td>Indicates the reterun value of system call.<br>When error occurred (returned -1), displays the following information.<br><br>&nbsp;&nbsp;<b>Err#</b>&lt;<i>errno number</i>&gt; &lt;<i>errno name</i>&gt;</td></tr>
 </table><p>
 <br>
 
@@ -99,7 +99,7 @@ In the case of passing by reference as output parameter, it is output as <b>[out
 <h2>Structure</h2>
 Structure parameter passing by reference is output as <b>{key1=value1, key2=value2, ...}</b>.<p>
 
-[Supplement]
+[Note]
 <ul>
 <li>in_addr structure is output as <b>"X.X.X.X"</b> instead of <b>{s_addr=XXXX}</b>.
 <li>sockaddr_in structure is output without sin_len and sin_zero.
@@ -112,9 +112,7 @@ Array parameter passing by reference is output as <b>[{element1}, {element2}, ..
 Each element is followed the structure notation above.<p>
 
 <h2>Buffer (Bytes array)</h2>
-Buffer parameter (mainly void*) such as data with sendXXX(2) and recvXXX(2) is passed by reference. Such parameter is output as below.<p>
-up to the first 16 bytes of bytes array is output as a string <b>"xxxxxxx"</b>.<br>
-The byte is replaced with Ascii if a byte is printable Ascii code, and resplaced with dot(.) otherwise.<p>
+Buffer parameter (mainly void*) such as data with sendXXX(2) and recvXXX(2) is passed by reference. Such parameters are output as follows, depending on the setting of <b>SYSTEM CALL TRACE</b>.<br>
 
 <table>
 <tr><th>Output level</th><th>Description</th></tr>

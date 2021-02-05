@@ -17,7 +17,7 @@ With executing after selecting predetermined parameter, system call is called.<p
 <ul>
 <li>When succeeded (returned 0 or upper)</li>
 Moves to the data dump view, displays sent data or received data in hex dump.<br>
-For some system calls, a source address or a control messages is displayed futher if any.<p>
+For some system calls, an address, control messages, and received message flags are displayed futher if any.<p>
 
 Received data could be saved. You can refer the data in Data Manager later. See <a href="Chapter7.html">Chapter 7. Data Manager</a> for details.<p>
 
@@ -31,13 +31,11 @@ Need to investigate the cause of the error by yourself.<p>
 When using sendto(2) or sendmsg(2), specifies the destination address.<br>
 Regists the address in Address Manager beforehand. See <a href="Chapter6.html">Chapter 6. Address Manager</a> for details.<p>
 
-When using recvfrom(2) or recvmsg(2), specifies whether gets remote address<p>
+When using recvfrom(2) or recvmsg(2), specifies whether gets remote address.<p>
 <br>
 
 <h1>Message buffer</h1>
 Specifies data content and data size if sending data, buffer size if receiving data.<br>
-When using sendmsg(2) or recvmsg(2), specifies multiple data / buffers.<p>
-
 The maximum size is limited to 64 KB in order to prevent an increase in packet charges due to erroneous operation.<p>
 
 Selects data content from the followings. When using a customized data, regists in Data Manager beforehand. See <a href="Chapter7.html">Chapter 7. Data Manager</a> for details.<p>
@@ -54,6 +52,12 @@ Selects data content from the followings. When using a customized data, regists 
 <tr><td>All 1 binary code</td><td>0xff 0xff 0xff 0xff ...</td></tr>
 <tr><td>Random binary code</td><td>Random of 0x00-0xff</td></tr>
 </table><p>
+
+Originally, if using sendmsg (2) and recvmsg (2) can be specified multiple data or buffer.
+
+[Note]<br>
+Originally, sendmsg(2) or recvmsg(2) can be specified multiple data / buffers.<br>
+However, in the current version, you can only specify a single data and buffer in this app.<p>
 <br>
 
 <h1>Control messages</h1>

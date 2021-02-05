@@ -9,9 +9,9 @@
 <body>
 <center>Chapter 1. Socket Simulator<br><a href="help.html">SOCTEST - USER'S GUIDE</a></center><p>
 
-In this chapter, it describes about the function of Socket Simulator's initial view (Top View).<p>
+In this chapter, it describes about the function of Socket Simulator's initial view (the "Top View").<p>
 
-In this view, creates, deletes, and polls a socket. And, lists sockets<p>
+In this view, creates and deletes a socket. And, polls, lists sockets.<p>
 
 <h1>Creation a socket</h1>
 With tapping <b>socket</b>, moves to the next view. You select protocol family, socket type, and protocol in the next view, then a new socket is created with calling socket(2).<br>
@@ -25,7 +25,7 @@ No upper limit on the number of sockets that can be created.<p>
 With swiping left a row, close(2) is called to close the socket, then removes from the list.<p>
 <br>
 
-<h1>Polling for all sockets</h1>
+<h1>Polling for sockets</h1>
 With pulling down Top View, you can poll the status for all sockets.<br>
 In this polling, it calls poll(2) with POLLIN|POLLPRI|POLLOUT as request events and 0 seconds as timeout.<p>
 <br>
@@ -51,7 +51,7 @@ It changes depending on the status of socket.<p>
 <tr><td align=center><img src="img/ShutdownWr.png"></td><td><b>Connected</b><br>Sender side of full duplex was shut down.</td></tr>
 <tr><td align=center><img src="img/ShutdownRdWr.png"></td><td><b>Disconnect</b><br>All of full duplex were shut down.</td></tr>
 </table><p>
-&nbsp;<b>*1</b> When the app setting <b>SHOW DESCRIPTION</b> is enabled, the icon of I/O mode is displayed.<br>
+&nbsp;<b>*1</b> When the app setting <b>DESCRIPTION</b> is enabled, the icon of I/O mode is displayed.<br>
 &nbsp;<b>*2</b> When the app setting <b>AUTO MONITORING</b> is enabled, the icon of connection status is displayed with SOCK_STREAM socket.<p>
 <br>
 
@@ -69,14 +69,14 @@ A title depending on the status of socket is displayed.<p>
 <tr><th>Title</th><th>Status</th></tr>
 <tr><td><b>INET domain socket</b></td><td>Initial state of AF_INET socket</td></tr>
 <tr><td><b>UNIX domain socket</b></td><td>Initial state of AF_UNIX socket</td></tr>
-<tr><td><b>Dst <i>Address</i></b></td><td>Socket is connected</td></tr>
-<tr><td><b>Src <i>Address</i></b></td><td>Socket is listening<br>Or, SOCK_DGRAM socket is assinged an address</td></tr>
+<tr><td><b>Dst <i>Address</i></b></td><td>Socket is connected.</td></tr>
+<tr><td><b>Src <i>Address</i></b></td><td>Socket is listening.<br>Or, SOCK_DGRAM socket is assinged an address.</td></tr>
 </table><p>
 <br>
 
 <h2>Socket parameters (Lower row 1)</h2>
 The following informaiton is displayed.<br>
-When the app setting <b>SHOW DESCRIPTION</b> is enabled, this row is displayed.<p>
+When the app setting <b>DESCRIPTION</b> is enabled, this row is displayed.<p>
 
 <ul>
 <li>File discriptor number
@@ -159,7 +159,7 @@ The value of the following parameters obtained TCP_CONNECTION_INFO option is dis
 <h2>Events bitmask (Lower row 8)</h2>
 The bit mask of response events by polling are displayed.<br>
 If there are some events, the corresponding event bit is highlighted.<br>
-This information is utilized due to confirm the presence of incoming data or error and judge completion of asynchronous processing.<p>
+This information is utilized due to confirm the presence of incoming data, error, etc.<p>
 
 [Note]<br>
 Three types of polling are available in this app.
